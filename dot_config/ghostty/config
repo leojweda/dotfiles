@@ -1,0 +1,9 @@
+background-opacity = 0.96
+cursor-color = red
+initial-window = false
+keybind = global:alt+`=toggle_quick_terminal
+quick-terminal-screen = macos-menu-bar
+theme = light:"iTerm2 Solarized Light",dark:"iTerm2 Solarized Dark"
+unfocused-split-opacity = 0.95
+window-colorspace = display-p3
+window-step-resize = true

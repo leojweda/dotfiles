@@ -1,0 +1,31 @@
+[init]
+	defaultBranch = main
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[user]
+	name = Leo Jweda
+	email = 792247+leojweda@users.noreply.github.com
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJajvm4Mf1O79bhGZXhl1GUtF6qTdLw4jLJLLX3k67HZ
+
+[core]
+	excludesfile = ~/.gitignore_global
+
+[gpg]
+	format = ssh
+
+[gpg "ssh"]
+	program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+
+[commit]
+	gpgsign = true
+
+[color]
+	ui = auto
+
+[color "status"]
+	changed = cyan

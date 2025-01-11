@@ -10,7 +10,7 @@
           "foreground": "p:base03",
           "style": "diamond",
           "template": " {{ if .SSHSession }}\ueba9 {{ end }}{{ if or .SSHSession .Root }}{{ .UserName }}{{end}}{{ if .SSHSession }}@{{ .HostName }}{{ end }} ",
-          "trailing_diamond": "\ue0b4",
+          "trailing_diamond": "\ue0b0",
           "type": "session"
         },
         {
@@ -19,8 +19,19 @@
           "properties": {
             "style": "agnoster_full"
           },
-          "style": "diamond",
-          "template": " {{ path .Path .Location }} ",
+          "style": "powerline",
+          "template": "{{ if not .Segments.Session.SSHSession }} {{ path .Path .Location }} {{ end }}",
+          "type": "path"
+        },
+        {
+          "background": "p:blue",
+          "foreground": "p:base3",
+          "powerline_symbol": "\ue0b0",
+          "properties": {
+            "style": "agnoster_full"
+          },
+          "style": "powerline",
+          "template": "{{ if .Segments.Session.SSHSession }} {{ path .Path .Location }} {{ end }}",
           "type": "path"
         },
         {

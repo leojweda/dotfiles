@@ -31,7 +31,52 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CACHE_HOME="$HOME/.cache"
 
-export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=36;01:cd=33;01:su=31;40;07:sg=36;40;07:tw=32;40;07:ow=33;40;07:'
+function get_interface_style() {
+  if defaults read -g AppleInterfaceStyle 2>/dev/null | grep -q "Dark"; then
+    echo "dark";
+  else
+    echo "light";
+  fi
+}
+
+typeset -A ZSH_HIGHLIGHT_STYLES
+
+function update_interface_style() {
+  export INTERFACE_STYLE=$(get_interface_style)
+
+  export LS_COLORS="$(vivid generate solarized-${INTERFACE_STYLE})"
+
+  # Update dependent variables
+  if [[ $INTERFACE_STYLE == "dark" ]]; then
+    ZSH_HIGHLIGHT_STYLES[comment]='fg=240'
+
+    export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240"
+
+    if [ -n "$TMUX" ]; then
+      tmux set -g status-style bg='black'
+
+      tmux set -g status-left "#[fg=color230,bg=color136,bold] #S #[fg=colour136,bg=black,nobold,nounderscore,noitalics] "
+      tmux set -g status-right "#[fg=brightblack,bg=black,nobold,nounderscore,noitalics]#[fg=colour244,bg=brightblack] #{?window_bigger,[#{window_offset_x}#,#{window_offset_y}] ,}#{pane_current_command} in #(basename \"#{pane_current_path}\") "
+      tmux setw -g window-status-format "#[fg=brightblack,bg=black,nobold,nounderscore,noitalics]#[fg=colour61,bg=brightblack] #I#F #[fg=colour37,bg=brightblack] #W #[fg=brightblack,bg=black,nobold,nounderscore,noitalics] "
+      tmux setw -g window-status-current-format "#[fg=colour61,bg=black,nobold,nounderscore,noitalics]#[fg=brightcyan,bg=colour61] #I#F #[fg=colour37,bg=brightblack] #W #[fg=brightblack,bg=black,nobold,nounderscore,noitalics] "
+    fi
+  else
+    ZSH_HIGHLIGHT_STYLES[comment]='fg=245'
+
+    export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=245"
+
+    if [ -n "$TMUX" ]; then
+      tmux set -g status-style bg='white'
+
+      tmux set -g status-left "#[fg=color230,bg=color136,bold] #S #[fg=colour136,bg=white,nobold,nounderscore,noitalics] "
+      tmux set -g status-right "#[fg=brightwhite,bg=white,nobold,nounderscore,noitalics]#[fg=brightcyan,bg=brightwhite] #{?window_bigger,[#{window_offset_x}#,#{window_offset_y}] ,}#{pane_current_command} in #(basename \"#{pane_current_path}\") "
+      tmux setw -g window-status-format "#[fg=brightwhite,bg=white,nobold,nounderscore,noitalics]#[fg=colour61,bg=brightwhite] #I#F #[fg=colour37,bg=brightwhite] #W #[fg=brightwhite,bg=white,nobold,nounderscore,noitalics] "
+      tmux setw -g window-status-current-format "#[fg=colour61,bg=white,nobold,nounderscore,noitalics]#[fg=brightwhite,bg=colour61] #I#F #[fg=colour37,bg=brightwhite] #W #[fg=brightwhite,bg=white,nobold,nounderscore,noitalics] "
+    fi
+  fi
+}
+
+update_interface_style
 
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
@@ -48,6 +93,8 @@ setopt HIST_VERIFY
 setopt HIST_BEEP
 
 setopt INTERACTIVE_COMMENTS
+
+alias k9='kill -9'
 
 alias ls='eza --icons --group-directories-first'
 alias ll='eza --icons --group-directories-first -l'
@@ -113,7 +160,7 @@ zinit snippet OMZP::encode64
 zinit snippet OMZP::man
 zinit snippet OMZP::thefuck
 zinit snippet OMZP::tldr
-zinit snippet OMZP::vi-mode
+# zinit snippet OMZP::vi-mode
 
 # Makes a directory and changes to it.
 function mkdcd {
@@ -125,13 +172,6 @@ function cdls {
   builtin cd "$argv[-1]" && ls "${(@)argv[1,-2]}"
 }
 
-# Previews files in Quick Look.
-function ql {
-  if (( $# > 0 )); then
-    qlmanage -p "$@" &> /dev/null
-  fi
-}
-
 # Deletes .DS_Store and __MACOSX directories.
 function osx-rm-dir-metadata {
   find "${@:-$PWD}" \( \
@@ -139,33 +179,6 @@ function osx-rm-dir-metadata {
     -type d -name '__MACOSX' \
   \) -print0 | xargs -0 rm -rf
 }
-
-function get_interface_style() {
-  if defaults read -g AppleInterfaceStyle 2>/dev/null | grep -q "Dark"; then
-    echo "dark";
-  else
-    echo "light";
-  fi
-}
-
-typeset -A ZSH_HIGHLIGHT_STYLES
-
-function update_interface_style() {
-  export INTERFACE_STYLE=$(get_interface_style)
-
-  # Update dependent variables
-  if [[ $INTERFACE_STYLE == "dark" ]]; then
-    ZSH_HIGHLIGHT_STYLES[comment]='fg=240'
-
-    export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240"
-  else
-    ZSH_HIGHLIGHT_STYLES[comment]='fg=245'
-
-    export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=245"
-  fi
-}
-
-update_interface_style
 
 # Hook into Zsh's `precmd` to check and update the interface style before each prompt
 precmd_functions+=(update_interface_style)

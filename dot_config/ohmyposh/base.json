@@ -97,7 +97,7 @@
         },
         {
           "background": "p:bgHighlight",
-          "foreground": "default",
+          "foreground": "p:comment",
           "invert_powerline": true,
           "powerline_symbol": "\ue0b6",
           "properties": {
@@ -108,7 +108,7 @@
         },
         {
           "background": "p:bg",
-          "foreground": "default",
+          "foreground": "p:comment",
           "invert_powerline": true,
           "style": "diamond",
           "template": "{{ .CurrentDate | date \"15:04:05\" }}",
@@ -143,11 +143,13 @@
     "list": {
       "dark": {
         "bg": "p:base03",
-        "bgHighlight": "p:base02"
+        "bgHighlight": "p:base02",
+        "comment": "p:base01"
       },
       "light": {
         "bg": "p:base3",
-        "bgHighlight": "p:base2"
+        "bgHighlight": "p:base2",
+        "comment": "p:base1"
       }
     },
     "template": "{{ if eq .Env.INTERFACE_STYLE \"dark\" }}dark{{ else }}light{{ end }}"

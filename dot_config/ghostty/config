@@ -3,7 +3,7 @@ background = 002B35
 background-opacity = 0.96
 cursor-color = red
 initial-window = false
-keybind = global:alt+`=toggle_quick_terminal
+keybind = global:alt+grave_accent=toggle_quick_terminal
 macos-option-as-alt = true
 quick-terminal-screen = macos-menu-bar
 theme = light:"iTerm2 Solarized Light",dark:"iTerm2 Solarized Dark"

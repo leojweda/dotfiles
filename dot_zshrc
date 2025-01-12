@@ -58,7 +58,7 @@ function update_interface_style() {
       tmux set -g status-left "#[fg=color230,bg=color136,bold] #S #[fg=colour136,bg=black,nobold,nounderscore,noitalics]"
       tmux setw -g window-status-format "#[fg=brightblack,bg=black,nobold,nounderscore,noitalics]#{?#{==:#{window_index},1},,}#[fg=brightblue,bg=black] #I#F #[fg=brightblue,bg=black] #W"
       tmux setw -g window-status-current-format "#[fg=brightblack,bg=black,nobold,nounderscore,noitalics]#{?#{==:#{window_index},1},,}#[fg=black,bg=brightblack,nobold,nounderscore,noitalics]#{?#{==:#{window_index},1},,}#[fg=brightblue,bg=brightblack] #I#F #[fg=brightblue,bg=brightblack] #W #[fg=brightblack,bg=black,nobold,nounderscore,noitalics]#{?#{==:#{window_index},#{session_windows}},,}"
-      tmux set -g status-right "#[fg=brightblack,bg=black,nobold,nounderscore,noitalics]#[fg=colour244,bg=brightblack] #{?window_bigger,[#{window_offset_x}#,#{window_offset_y}] ,}#{pane_current_command} in #(basename \"#{pane_current_path}\") "
+      tmux set -g status-right "#{?client_prefix,#[fg=blue]#[bg=black]#[fg=brightblack]#[bg=blue]^; #[fg=brightblack]#[bg=blue],#[fg=brightblack]#[bg=black]}#[fg=colour244,bg=brightblack] #{?window_bigger,[#{window_offset_x}#,#{window_offset_y}] ,}#{pane_current_command} in #(basename \"#{pane_current_path}\") "
     fi
   else
     ZSH_HIGHLIGHT_STYLES[comment]='fg=245'
@@ -71,7 +71,7 @@ function update_interface_style() {
       tmux set -g status-left "#[fg=color230,bg=color136,bold] #S #[fg=colour136,bg=white,nobold,nounderscore,noitalics]"
       tmux setw -g window-status-format "#[fg=brightwhite,bg=white]#{?#{==:#{window_index},1},,}#[fg=brightyellow,bg=white] #I#F #[fg=brightyellow,bg=white] #W"
       tmux setw -g window-status-current-format "#[fg=brightwhite,bg=white]#{?#{==:#{window_index},1},,}#[fg=white,bg=brightwhite,nobold,nounderscore,noitalics]#{?#{==:#{window_index},1},,}#[fg=brightyellow,bg=brightwhite] #I#F #[fg=brightyellow,bg=brightwhite] #W #[fg=brightwhite,bg=white,nobold,nounderscore,noitalics]#{?#{==:#{window_index},#{session_windows}},,}"
-      tmux set -g status-right "#[fg=brightwhite,bg=white,nobold,nounderscore,noitalics]#[fg=brightcyan,bg=brightwhite] #{?window_bigger,[#{window_offset_x}#,#{window_offset_y}] ,}#{pane_current_command} in #(basename \"#{pane_current_path}\") "
+      tmux set -g status-right "#{?client_prefix,#[fg=blue]#[bg=white]#[fg=brightwhite]#[bg=blue]^; #[fg=brightwhite]#[bg=blue],#[fg=brightwhite]#[bg=white]}#[fg=brightcyan,bg=brightwhite] #{?window_bigger,[#{window_offset_x}#,#{window_offset_y}] ,}#{pane_current_command} in #(basename \"#{pane_current_path}\") "
     fi
   fi
 }

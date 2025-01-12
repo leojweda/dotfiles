@@ -1,4 +1,5 @@
-# background = FDF6E2
+#background = FDF6E2
+background = 002B35
 background-opacity = 0.96
 cursor-color = red
 initial-window = false

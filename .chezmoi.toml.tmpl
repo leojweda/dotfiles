@@ -1,3 +1,10 @@
+{{- $codespaces:= env "CODESPACES" | not | not -}}
+sourceDir = {{ .chezmoi.sourceDir | quote }}
+
+[edit]
+	command = "code"
+	args = ["--wait"]
+
 [git]
 	autoCommit = true
 	autoPush = true

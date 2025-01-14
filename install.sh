@@ -13,7 +13,7 @@ command -v brew >/dev/null 2>&1 || \
 
 if ! chezmoi="$(command -v chezmoi)"; then
 	if [[ $OSTYPE == darwin* ]]; then
-		PATH="/opt/homebrew/bin:$PATH"
+		eval "$(/opt/homebrew/bin/brew shellenv)"
 	elif [[ $OSTYPE == linux* ]]; then
 		eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 	else
@@ -32,7 +32,7 @@ set -- init --apply --source="${script_dir}"
 
 echo "Running 'chezmoi $*'" >&2
 # exec: replace current process with chezmoi
-exec chezmoi "$@"
+chezmoi "$@"
 
 brew update
 brew bundle

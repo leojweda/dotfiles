@@ -1,4 +1,4 @@
-brew "1password-cli"
+# brew "1password-cli"
 brew "bat"
 brew "chezmoi"
 brew "cloudflared"

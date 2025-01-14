@@ -10,10 +10,17 @@ set -eufo pipefail
 command -v brew >/dev/null 2>&1 || \
   (echo '🍺  Installing Homebrew' && NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)")
 
-which brew
-
 if ! chezmoi="$(command -v chezmoi)"; then
-	brew install chezmoi
+	if [[ $OSTYPE == darwin* ]]; then
+		brew='/opt/homebrew/bin/brew'
+	elif [[ $OSTYPE == linux* ]]; then
+		brew='/home/linuxbrew/.linuxbrew/bin/brew'
+	else
+		echo "Unsupported OS: ${OSTYPE}" >&2
+		exit 1
+	fi
+
+	exec "$brew" install chezmoi
 fi
 
 # POSIX way to get script's dir: https://stackoverflow.com/a/29834779/12156188

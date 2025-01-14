@@ -9,7 +9,7 @@ set -eufo pipefail
 # Install Homebrew
 command -v brew >/dev/null 2>&1 || \
 	echo '📦  Installing Homebrew' >&2 && \
-	NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)")
+	NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 if ! chezmoi="$(command -v chezmoi)"; then
 	if [[ $OSTYPE == darwin* ]]; then

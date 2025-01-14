@@ -15,7 +15,7 @@ if ! chezmoi="$(command -v chezmoi)"; then
 	if [[ $OSTYPE == darwin* ]]; then
 		PATH="/opt/homebrew/bin:$PATH"
 	elif [[ $OSTYPE == linux* ]]; then
-		PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+		eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 	else
 		echo "Unsupported OS: ${OSTYPE}" >&2
 		exit 1

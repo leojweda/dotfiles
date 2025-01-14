@@ -13,9 +13,9 @@ command -v brew >/dev/null 2>&1 || \
 
 if ! chezmoi="$(command -v chezmoi)"; then
 	if [[ $OSTYPE == darwin* ]]; then
-		$PATH="/opt/homebrew/bin:$PATH"
+		PATH="/opt/homebrew/bin:$PATH"
 	elif [[ $OSTYPE == linux* ]]; then
-		$PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+		PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 	else
 		echo "Unsupported OS: ${OSTYPE}" >&2
 		exit 1

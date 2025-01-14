@@ -6,12 +6,11 @@
 # -o pipefail: exit on pipe error
 set -eufo pipefail
 
-# Install Homebrew
-command -v brew >/dev/null 2>&1 || \
+# Install Homebrew if it's not installed
+if ! command -v brew; then
 	echo '📦  Installing Homebrew' >&2 && \
 	NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-if ! chezmoi="$(command -v chezmoi)"; then
 	if [[ $OSTYPE == darwin* ]]; then
 		eval "$(/opt/homebrew/bin/brew shellenv)"
 	elif [[ $OSTYPE == linux* ]]; then
@@ -20,10 +19,11 @@ if ! chezmoi="$(command -v chezmoi)"; then
 		echo "Unsupported OS: ${OSTYPE}" >&2
 		exit 1
 	fi
-
-	echo '📦  Installing chezmoi' >&2 && \
-	brew install chezmoi
 fi
+
+echo '📦  Installing dependencies' >&2 && \
+brew update && \
+brew bundle
 
 # POSIX way to get script's dir: https://stackoverflow.com/a/29834779/12156188
 script_dir="$(cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)"
@@ -32,7 +32,4 @@ set -- init --apply --source="${script_dir}"
 
 echo "Running 'chezmoi $*'" >&2
 # exec: replace current process with chezmoi
-chezmoi "$@"
-
-brew update
-brew bundle
+exec chezmoi "$@"

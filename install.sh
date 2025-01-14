@@ -10,6 +10,8 @@ set -eufo pipefail
 command -v brew >/dev/null 2>&1 || \
   (echo '🍺  Installing Homebrew' && NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)")
 
+which brew
+
 if ! chezmoi="$(command -v chezmoi)"; then
 	brew install chezmoi
 fi

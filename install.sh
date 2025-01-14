@@ -8,19 +8,21 @@ set -eufo pipefail
 
 # Install Homebrew
 command -v brew >/dev/null 2>&1 || \
-  (echo '🍺  Installing Homebrew' && NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)")
+	echo '📦  Installing Homebrew' >&2 && \
+	NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)")
 
 if ! chezmoi="$(command -v chezmoi)"; then
 	if [[ $OSTYPE == darwin* ]]; then
-		brew='/opt/homebrew/bin/brew'
+		$PATH="/opt/homebrew/bin:$PATH"
 	elif [[ $OSTYPE == linux* ]]; then
-		brew='/home/linuxbrew/.linuxbrew/bin/brew'
+		$PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 	else
 		echo "Unsupported OS: ${OSTYPE}" >&2
 		exit 1
 	fi
 
-	exec "$brew" install chezmoi
+	echo '📦  Installing chezmoi' >&2 && \
+	brew install chezmoi
 fi
 
 # POSIX way to get script's dir: https://stackoverflow.com/a/29834779/12156188
@@ -30,7 +32,7 @@ set -- init --apply --source="${script_dir}"
 
 echo "Running 'chezmoi $*'" >&2
 # exec: replace current process with chezmoi
-exec "$chezmoi" "$@"
+exec chezmoi "$@"
 
 brew update
 brew bundle

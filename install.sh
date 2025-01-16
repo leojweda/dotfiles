@@ -28,7 +28,7 @@ brew bundle
 if [[ $OSTYPE == linux* ]]; then
 	echo '🔠  Installing JetBrains Mono Nerd Font' >&2 && \
 	git clone --depth=1 https://github.com/ryanoasis/nerd-fonts.git /tmp/nerd-fonts && \
-	cd nerd-fonts && \
+	cd /tmp/nerd-fonts && \
 	./install.sh JetBrainsMono
 fi
 

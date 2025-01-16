@@ -8,7 +8,7 @@ set -eufo pipefail
 
 # Install Homebrew if it's not installed
 if ! command -v brew; then
-	echo '📦  Installing Homebrew' >&2 && \
+	echo '🍺  Installing Homebrew' >&2 && \
 	NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 	if [[ $OSTYPE == darwin* ]]; then
@@ -30,6 +30,6 @@ script_dir="$(cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)"
 
 set -- init --apply --source="${script_dir}"
 
-echo "Running 'chezmoi $*'" >&2
+echo "🏠  Running 'chezmoi $*'" >&2
 # exec: replace current process with chezmoi
 exec chezmoi "$@"

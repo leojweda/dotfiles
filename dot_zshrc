@@ -34,7 +34,9 @@ export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CACHE_HOME="$HOME/.cache"
 
 function get_interface_style() {
-  if defaults read -g AppleInterfaceStyle 2>/dev/null | grep -q "Dark"; then
+  background_color=$(xtermcontrol --get-bg)
+
+  if [[ $background_color == "rgb:0000/2b2b/3636" || $background_color == "rgb:0000/2b2b/3535" ]]; then
     echo "dark";
   else
     echo "light";
@@ -189,14 +191,10 @@ function osx-rm-dir-metadata {
 }
 
 # Hook into Zsh's `precmd` to check and update the interface style before each prompt
-precmd_functions+=(update_interface_style)
+# precmd_functions+=(update_interface_style)
 
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
   eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/base.json)"
-
-  function set_poshcontext() {
-    export INTERFACE_STYLE=$(get_interface_style)
-  }
 fi
 
 ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=green'

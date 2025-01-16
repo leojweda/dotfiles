@@ -56,8 +56,16 @@ function update_interface_style() {
 
     export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240"
 
-    sed -i '' 's/^background = FDF6E2/#background = FDF6E2/' ~/.config/ghostty/config
-    sed -i '' 's/^#background = 002B35/background = 002B35/' ~/.config/ghostty/config
+    if [[ $OSTYPE == darwin* ]]; then
+      sed -i '' 's/^background = FDF6E2/#background = FDF6E2/' ~/.config/ghostty/config
+      sed -i '' 's/^#background = 002B35/background = 002B35/' ~/.config/ghostty/config
+    elif [[ $OSTYPE == linux* ]]; then
+      sed -i 's/^background = FDF6E2/#background = FDF6E2/' ~/.config/ghostty/config
+      sed -i 's/^#background = 002B35/background = 002B35/' ~/.config/ghostty/config
+    else
+      echo "Unsupported OS: ${OSTYPE}" >&2
+      exit 1
+    fi
 
     if [ -n "$TMUX" ]; then
       tmux set -g status-style bg='black'
@@ -72,8 +80,16 @@ function update_interface_style() {
 
     export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=245"
 
-    sed -i '' 's/^background = 002B35/#background = 002B35/' ~/.config/ghostty/config
-    sed -i '' 's/^#background = FDF6E2/background = FDF6E2/' ~/.config/ghostty/config
+    if [[ $OSTYPE == darwin* ]]; then
+      sed -i '' 's/^background = 002B35/#background = 002B35/' ~/.config/ghostty/config
+      sed -i '' 's/^#background = FDF6E2/background = FDF6E2/' ~/.config/ghostty/config
+    elif [[ $OSTYPE == linux* ]]; then
+      sed -i 's/^background = 002B35/#background = 002B35/' ~/.config/ghostty/config
+      sed -i 's/^#background = FDF6E2/background = FDF6E2/' ~/.config/ghostty/config
+    else
+      echo "Unsupported OS: ${OSTYPE}" >&2
+      exit 1
+    fi
 
     if [ -n "$TMUX" ]; then
       tmux set -g status-style bg='white'

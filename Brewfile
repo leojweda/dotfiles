@@ -14,7 +14,7 @@ brew "vivid"
 brew "wget"
 # brew "ykpers"
 # brew "yt-dlp"
-brew xtermcontrol
+brew "xtermcontrol"
 brew "zoxide"
 
 tap "jandedobbeleer/oh-my-posh"

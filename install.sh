@@ -25,13 +25,6 @@ echo '📦  Installing dependencies' >&2 && \
 brew update && \
 brew bundle
 
-if [[ $OSTYPE == linux* ]]; then
-	echo '🔠  Installing JetBrains Mono Nerd Font' >&2 && \
-	git clone --depth=1 https://github.com/ryanoasis/nerd-fonts.git /tmp/nerd-fonts && \
-	cd /tmp/nerd-fonts && \
-	./install.sh JetBrainsMono
-fi
-
 # POSIX way to get script's dir: https://stackoverflow.com/a/29834779/12156188
 script_dir="$(cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)"
 
@@ -39,6 +32,13 @@ set -- init --apply --source="${script_dir}"
 
 echo "🏠  Running 'chezmoi $*'" >&2 && \
 chezmoi "$@"
+
+if [[ $OSTYPE == linux* ]]; then
+	echo '🔠  Installing JetBrains Mono Nerd Font' >&2 && \
+	git clone --depth=1 https://github.com/ryanoasis/nerd-fonts.git /tmp/nerd-fonts && \
+	cd /tmp/nerd-fonts && \
+	./install.sh JetBrainsMono
+fi
 
 echo '🔧  Updating shell configuration' >&2 && \
 source ~/.zshrc

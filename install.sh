@@ -34,4 +34,4 @@ echo "🏠  Running 'chezmoi $*'" >&2 && \
 chezmoi "$@"
 
 echo '🔧  Updating shell configuration' >&2 && \
-source ~/.zshrc
+exec zsh -l

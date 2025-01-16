@@ -20,6 +20,4 @@ brew "zoxide"
 tap "jandedobbeleer/oh-my-posh"
 brew "oh-my-posh"
 
-cask "font-jetbrains-mono-nerd-font"
-
 # cask "ghostty"

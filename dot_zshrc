@@ -1,3 +1,5 @@
+# Skip interactive-only commands for non-interactive shells
+[[ $- != *i* ]] && return
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then

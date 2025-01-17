@@ -20,6 +20,7 @@ brew "wget"
 brew "xtermcontrol"
 # brew "ykpers"
 # brew "yt-dlp"
+# brew "yubico-piv-tool"
 brew "zoxide"
 
 tap "jandedobbeleer/oh-my-posh"

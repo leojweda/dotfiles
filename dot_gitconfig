@@ -29,3 +29,6 @@
 
 [color "status"]
 	changed = cyan
+
+# [credential]
+# 	helper = osxkeychain

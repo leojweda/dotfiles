@@ -34,38 +34,60 @@ export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CACHE_HOME="$HOME/.cache"
 
 function get_interface_style() {
+  if defaults read -g AppleInterfaceStyle 2>/dev/null | grep -q "Dark"; then
+    echo "dark";
+  else
+    echo "light";
+  fi
+}
+
+function get_appearance() {
   background_color=$(xtermcontrol --get-bg)
 
-  if [[ $background_color == 'rgb:0000/2b2b/3636' || $background_color == 'rgb:0000/2b2b/3535' ]]; then
+  if [[ $background_color == 'rgb:0000/2b2b/3636' || $background_color == 'rgb:0000/2B2B/3535' ]]; then
     echo 'dark';
   else
     echo 'light';
   fi
-
-  # echo 'dark'
 }
 
 typeset -A ZSH_HIGHLIGHT_STYLES
 
-function update_interface_style() {
-  new_interface_style=$(get_interface_style)
+function update_appearance() {
+  if [[ $OSTYPE == darwin* ]]; then
+    new_interface_style=$(get_interface_style)
 
-  # if [[ $INTERFACE_STYLE == $new_interface_style ]]; then
-  #   return
-  # fi
+    if [[ $INTERFACE_STYLE != $new_interface_style ]]; then
+      export INTERFACE_STYLE=$new_interface_style
 
-  export INTERFACE_STYLE=$new_interface_style
+      if [[ $INTERFACE_STYLE == 'dark' ]]; then
+        # Ghostty
+        old_background_color='FDF6E2'
+        new_background_color='002B35'
+      else
+        # Ghostty
+        old_background_color='002B35'
+        new_background_color='FDF6E2'
+      fi
 
-  export LS_COLORS="$(vivid generate solarized-${INTERFACE_STYLE})"
+      sed -i '' "s/^background = ${old_background_color}/#background = ${old_background_color}/" ~/.config/ghostty/config
+      sed -i '' "s/^#background = ${new_background_color}/background = ${new_background_color}/" ~/.config/ghostty/config
+    fi
+  fi
 
-  # Update dependent variables
-  if [[ $INTERFACE_STYLE == 'dark' ]]; then
+  new_appearance=$(get_appearance)
+
+  if [[ $APPEARANCE == $new_appearance ]]; then
+    return
+  fi
+
+  export APPEARANCE=$new_appearance
+
+  export LS_COLORS="$(vivid generate solarized-${APPEARANCE})"
+
+  if [[ $APPEARANCE == 'dark' ]]; then
     # Zsh Syntax Highlighting
     comment_color='240'
-
-    # Ghostty
-    old_background_color='FDF6E2'
-    new_background_color='002B35'
 
     # Tmux
     background_highlight_color='black'
@@ -75,10 +97,6 @@ function update_interface_style() {
   else
     # Zsh Syntax Highlighting
     comment_color='245'
-
-    # Ghostty
-    old_background_color='002B35'
-    new_background_color='FDF6E2'
 
     # Tmux
     background_highlight_color='white'
@@ -91,28 +109,37 @@ function update_interface_style() {
 
   export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=${comment_color}"
 
-  if [[ $OSTYPE == darwin* ]]; then
-    sed -i '' "s/^background = ${old_background_color}/#background = ${old_background_color}/" ~/.config/ghostty/config
-    sed -i '' "s/^#background = ${new_background_color}/background = ${new_background_color}/" ~/.config/ghostty/config
-  elif [[ $OSTYPE == linux* ]]; then
-    sed -i "s/^background = ${old_background_color}/#background = ${old_background_color}/" ~/.config/ghostty/config
-    sed -i "s/^#background = ${new_background_color}/background = ${new_background_color}/" ~/.config/ghostty/config
-  else
-    echo "Unsupported OS: ${OSTYPE}" >&2
-    exit 1
-  fi
-
   if [ -n "$TMUX" ]; then
-    tmux set -g status-style bg="${background_highlight_color}"
+    status_bar_background_color=$background_highlight_color
+    tmux set -g status-style bg=$status_bar_background_color
 
-    tmux set -g status-left "#[fg=color230,bg=color136,bold] #S #[fg=colour136,bg=${background_highlight_color},nobold,nounderscore,noitalics]"
-    tmux setw -g window-status-format "#[fg=${background_color},bg=${background_highlight_color},nobold,nounderscore,noitalics]#{?#{==:#{window_index},1},,}#[fg=${text_color},bg=${background_highlight_color}] #I#F #[fg=${text_color},bg=${background_highlight_color}] #W"
-    tmux setw -g window-status-current-format "#[fg=${background_color},bg=${background_highlight_color},nobold,nounderscore,noitalics]#{?#{==:#{window_index},1},,}#[fg=${background_highlight_color},bg=${background_color},nobold,nounderscore,noitalics]#{?#{==:#{window_index},1},,}#[fg=${text_color},bg=${background_color}] #I#F #[fg=${text_color},bg=${background_color}] #W #[fg=${background_color},bg=${background_highlight_color},nobold,nounderscore,noitalics]#{?#{==:#{window_index},#{session_windows}},,}"
-    tmux set -g status-right "#{?client_prefix,#[fg=blue]#[bg=${background_highlight_color}]#[fg=${background_color}]#[bg=blue]^; #[fg=${background_color}]#[bg=blue],#[fg=${background_color}]#[bg=${background_highlight_color}]}#[fg=${optional_text_color},bg=${background_color}] #{?window_bigger,[#{window_offset_x}#,#{window_offset_y}] ,}#{pane_current_command} in #(basename \"#{pane_current_path}\")"
+    status_bar_left_background_color='color136'
+    status_bar_left_foreground_color='color230'
+    status_bar_left_content="#[fg=${status_bar_left_foreground_color},bg=${status_bar_left_background_color},bold] #S "
+    status_bar_left_suffix="#[fg=${status_bar_left_background_color},bg=${status_bar_background_color},nobold,nounderscore,noitalics]"
+    tmux set -g status-left "${status_bar_left_content}${status_bar_left_suffix}"
+
+    window_background_color=$status_bar_background_color
+    window_prefix_color=$background_color
+    window_prefix="#[fg=${window_prefix_color},bg=${window_background_color},nobold,nounderscore,noitalics]#{?#{==:#{window_index},1},,}"
+    window_content="#[fg=${text_color},bg=${window_background_color}] #I#F #W"
+    tmux setw -g window-status-format "${window_prefix}${window_content}"
+
+    curent_window_background_color=$status_bar_background_color
+    current_window_prefix_color=$background_color
+    current_window_prefix="#[fg=${current_window_prefix_color},bg=${curent_window_background_color},nobold,nounderscore,noitalics]#{?#{==:#{window_index},1},,}#[fg=${curent_window_background_color},bg=${current_window_prefix_color},nobold,nounderscore,noitalics]#{?#{==:#{window_index},1},,}"
+    current_window_content="#[fg=${text_color},bg=${current_window_prefix_color}] #I#F #[fg=${text_color},bg=${current_window_prefix_color}] #W "
+    current_window_suffix="#[fg=${current_window_prefix_color},bg=${status_bar_background_color},nobold,nounderscore,noitalics]#{?#{==:#{window_index},#{session_windows}},,}"
+    tmux setw -g window-status-current-format "${current_window_prefix}${current_window_content}${current_window_suffix}"
+
+    leader_key_indicator_color='blue'
+    status_bar_right_suffix="#{?client_prefix,#[fg=${leader_key_indicator_color}]#[bg=${status_bar_background_color}]#[fg=${background_color}]#[bg=${leader_key_indicator_color}]^; #[fg=${background_color}]#[bg=${leader_key_indicator_color}],#[fg=${background_color}]#[bg=${status_bar_background_color}]}"
+    status_bar_right_content="#[fg=${optional_text_color},bg=${background_color}] #{?window_bigger,[#{window_offset_x}#,#{window_offset_y}] ,}#{pane_current_command} in #(basename \"#{pane_current_path}\")"
+    tmux set -g status-right "${status_bar_right_suffix}${status_bar_right_content}"
   fi
 }
 
-update_interface_style
+update_appearance
 
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
@@ -217,7 +244,7 @@ function osx-rm-dir-metadata {
 }
 
 # Hook into Zsh's `precmd` to check and update the interface style before each prompt
-# precmd_functions+=(update_interface_style)
+# precmd_functions+=(update_appearance)
 
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
   eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/base.json)"

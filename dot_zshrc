@@ -218,7 +218,7 @@ zinit light zsh-users/zsh-autosuggestions
 
 zinit load 'djui/alias-tips'
 
-zinit snippet OMZP::dotenv
+zinit snippet OMZP::colored-man-pages
 zinit snippet OMZP::encode64
 zinit snippet OMZP::man
 zinit snippet OMZP::thefuck
@@ -271,6 +271,4 @@ if [ -f "$HB_CNF_HANDLER" ]; then
   source "$HB_CNF_HANDLER";
 fi
 
-export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+eval "$(mise activate zsh)"

@@ -12,6 +12,9 @@
 	email = 792247+leojweda@users.noreply.github.com
 	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJajvm4Mf1O79bhGZXhl1GUtF6qTdLw4jLJLLX3k67HZ
 
+[github]
+  user = leojweda
+
 [core]
 	excludesfile = ~/.gitignore_global
 

@@ -44,7 +44,7 @@ function get_interface_style() {
 function get_appearance() {
   background_color=$(xtermcontrol --get-bg)
 
-  if [[ $background_color == 'rgb:0000/2b2b/3636' || $background_color == 'rgb:0000/2B2B/3535' ]]; then
+  if [[ $background_color == 'rgb:0000/2b2b/3636' || $background_color == 'rgb:0000/2b2b/3535' ]]; then
     echo 'dark';
   else
     echo 'light';
@@ -87,30 +87,42 @@ function update_appearance() {
 
   if [[ $APPEARANCE == 'dark' ]]; then
     # Zsh Syntax Highlighting
-    comment_color='240'
+    zsh_comment_color='240'
 
     # Tmux
-    background_highlight_color='black'
-    background_color='brightblack'
-    text_color='brightblue'
-    optional_text_color='brightgreen'
+    tmux_background_highlight_color='black'
+    tmux_background_color='brightblack'
+    tmux_text_color='brightblue'
+    tmux_optional_text_color='brightgreen'
+
+    # nano
+    nano_body_text_color='lightblue'
+    nano_comment_color='lightgreen'
+    nano_emphasized_color='lightcyan'
+    nano_background_highlight_color='black'
   else
     # Zsh Syntax Highlighting
-    comment_color='245'
+    zsh_comment_color='245'
 
     # Tmux
-    background_highlight_color='white'
-    background_color='brightwhite'
-    text_color='brightyellow'
-    optional_text_color='brightcyan'
+    tmux_background_highlight_color='white'
+    tmux_background_color='brightwhite'
+    tmux_text_color='brightyellow'
+    tmux_optional_text_color='brightcyan'
+
+    # nano
+    nano_body_text_color='lightyellow'
+    nano_comment_color='lightcyan'
+    nano_emphasized_color='lightgreen'
+    nano_background_highlight_color='white'
   fi
 
-  ZSH_HIGHLIGHT_STYLES[comment]="fg=${comment_color}"
+  ZSH_HIGHLIGHT_STYLES[comment]="fg=${zsh_comment_color}"
 
-  export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=${comment_color}"
+  export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=${zsh_comment_color}"
 
   if [ -n "$TMUX" ]; then
-    status_bar_background_color=$background_highlight_color
+    status_bar_background_color=$tmux_background_highlight_color
     tmux set -g status-style bg=$status_bar_background_color
 
     status_bar_left_background_color='color136'
@@ -120,23 +132,27 @@ function update_appearance() {
     tmux set -g status-left "${status_bar_left_content}${status_bar_left_suffix}"
 
     window_background_color=$status_bar_background_color
-    window_prefix_color=$background_color
+    window_prefix_color=$tmux_background_color
     window_prefix="#[fg=${window_prefix_color},bg=${window_background_color},nobold,nounderscore,noitalics]#{?#{==:#{window_index},1},,}"
-    window_content="#[fg=${text_color},bg=${window_background_color}] #I#F #W"
+    window_content="#[fg=${tmux_text_color},bg=${window_background_color}] #I#F #W"
     tmux setw -g window-status-format "${window_prefix}${window_content}"
 
     curent_window_background_color=$status_bar_background_color
-    current_window_prefix_color=$background_color
+    current_window_prefix_color=$tmux_background_color
     current_window_prefix="#[fg=${current_window_prefix_color},bg=${curent_window_background_color},nobold,nounderscore,noitalics]#{?#{==:#{window_index},1},,}#[fg=${curent_window_background_color},bg=${current_window_prefix_color},nobold,nounderscore,noitalics]#{?#{==:#{window_index},1},,}"
-    current_window_content="#[fg=${text_color},bg=${current_window_prefix_color}] #I#F #[fg=${text_color},bg=${current_window_prefix_color}] #W "
+    current_window_content="#[fg=${tmux_text_color},bg=${current_window_prefix_color}] #I#F #[fg=${tmux_text_color},bg=${current_window_prefix_color}] #W "
     current_window_suffix="#[fg=${current_window_prefix_color},bg=${status_bar_background_color},nobold,nounderscore,noitalics]#{?#{==:#{window_index},#{session_windows}},,}"
     tmux setw -g window-status-current-format "${current_window_prefix}${current_window_content}${current_window_suffix}"
 
     leader_key_indicator_color='blue'
-    status_bar_right_suffix="#{?client_prefix,#[fg=${leader_key_indicator_color}]#[bg=${status_bar_background_color}]#[fg=${background_color}]#[bg=${leader_key_indicator_color}]^; #[fg=${background_color}]#[bg=${leader_key_indicator_color}],#[fg=${background_color}]#[bg=${status_bar_background_color}]}"
-    status_bar_right_content="#[fg=${optional_text_color},bg=${background_color}] #{?window_bigger,[#{window_offset_x}#,#{window_offset_y}] ,}#{pane_current_command} in #(basename \"#{pane_current_path}\")"
+    status_bar_right_suffix="#{?client_prefix,#[fg=${leader_key_indicator_color}]#[bg=${status_bar_background_color}]#[fg=${tmux_background_color}]#[bg=${leader_key_indicator_color}]^; #[fg=${tmux_background_color}]#[bg=${leader_key_indicator_color}],#[fg=${tmux_background_color}]#[bg=${status_bar_background_color}]}"
+    status_bar_right_content="#[fg=${tmux_optional_text_color},bg=${tmux_background_color}] #{?window_bigger,[#{window_offset_x}#,#{window_offset_y}] ,}#{pane_current_command} in #(basename \"#{pane_current_path}\")"
     tmux set -g status-right "${status_bar_right_suffix}${status_bar_right_content}"
   fi
+
+  sed -i '' "s|^set keycolor .*|set keycolor ${nano_body_text_color},${nano_background_highlight_color}|" ~/.config/nano/nanorc
+  sed -i '' "s|^set numbercolor .*|set numbercolor ${nano_comment_color},${nano_background_highlight_color}|" ~/.config/nano/nanorc
+  sed -i '' "s|^set titlecolor .*|set titlecolor ${nano_emphasized_color},${nano_background_highlight_color}|" ~/.config/nano/nanorc
 }
 
 update_appearance

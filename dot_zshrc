@@ -33,6 +33,8 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CACHE_HOME="$HOME/.cache"
 
+export BAT_CONFIG_DIR="${XDG_CONFIG_HOME}/bat"
+
 function get_interface_style() {
   if defaults read -g AppleInterfaceStyle 2>/dev/null | grep -q "Dark"; then
     echo "dark";
@@ -70,8 +72,8 @@ function update_appearance() {
         new_background_color='FDF6E2'
       fi
 
-      sed -i '' "s/^background = ${old_background_color}/#background = ${old_background_color}/" ~/.config/ghostty/config
-      sed -i '' "s/^#background = ${new_background_color}/background = ${new_background_color}/" ~/.config/ghostty/config
+      sed -i '' "s/^background = ${old_background_color}/#background = ${old_background_color}/" "${XDG_CONFIG_HOME}/ghostty/config"
+      sed -i '' "s/^#background = ${new_background_color}/background = ${new_background_color}/" "${XDG_CONFIG_HOME}/ghostty/config"
     fi
   fi
 
@@ -150,9 +152,9 @@ function update_appearance() {
     tmux set -g status-right "${status_bar_right_suffix}${status_bar_right_content}"
   fi
 
-  sed -i '' "s|^set keycolor .*|set keycolor ${nano_body_text_color},${nano_background_highlight_color}|" ~/.config/nano/nanorc
-  sed -i '' "s|^set numbercolor .*|set numbercolor ${nano_comment_color},${nano_background_highlight_color}|" ~/.config/nano/nanorc
-  sed -i '' "s|^set titlecolor .*|set titlecolor ${nano_emphasized_color},${nano_background_highlight_color}|" ~/.config/nano/nanorc
+  sed -i '' "s|^set keycolor .*|set keycolor ${nano_body_text_color},${nano_background_highlight_color}|" "${XDG_CONFIG_HOME}/nano/nanorc"
+  sed -i '' "s|^set numbercolor .*|set numbercolor ${nano_comment_color},${nano_background_highlight_color}|" "${XDG_CONFIG_HOME}/nano/nanorc"
+  sed -i '' "s|^set titlecolor .*|set titlecolor ${nano_emphasized_color},${nano_background_highlight_color}|" "${XDG_CONFIG_HOME}/nano/nanorc"
 }
 
 update_appearance
@@ -178,6 +180,9 @@ alias k9='kill -9'
 alias ls='eza --icons --group-directories-first'
 alias ll='eza --icons --group-directories-first -l'
 
+alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
+alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
+
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -201,6 +206,22 @@ alias hidefiles='defaults write com.apple.finder AppleShowAllFiles -bool false &
 
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
+
+export FZF_DEFAULT_OPTS='--tmux right,50%'
+export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# Use fd (https://github.com/sharkdp/fd) for listing path candidates.
+# - The first argument to the function ($1) is the base path to start traversal
+# - See the source code (completion.{bash,zsh}) for the details.
+_fzf_compgen_path() {
+  fd --hidden --follow --exclude ".git" . "$1"
+}
+
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+  fd --type d --hidden --follow --exclude ".git" . "$1"
+}
 
 eval "$(gh copilot alias -- zsh)"
 
@@ -263,7 +284,7 @@ function osx-rm-dir-metadata {
 # precmd_functions+=(update_appearance)
 
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
-  eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/base.json)"
+  eval "$(oh-my-posh init zsh --config ${XDG_CONFIG_HOME}/ohmyposh/base.json)"
 fi
 
 ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=green'

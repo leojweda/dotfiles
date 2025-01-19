@@ -1,6 +1,6 @@
 set autoindent
-set keycolor lightyellow,white
+set keycolor lightblue,black
 set linenumbers
 set mouse
-set numbercolor lightcyan,white
-set titlecolor lightgreen,white
+set numbercolor lightgreen,black
+set titlecolor lightcyan,black

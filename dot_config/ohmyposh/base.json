@@ -163,7 +163,7 @@
         "comment": "p:base1"
       }
     },
-    "template": "{{ if eq .Env.INTERFACE_STYLE \"dark\" }}dark{{ else }}light{{ end }}"
+    "template": "{{ if eq .Env.APPEARANCE \"dark\" }}dark{{ else }}light{{ end }}"
   },
   "secondary_prompt": {
     "background": "transparent",

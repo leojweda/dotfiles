@@ -256,7 +256,7 @@ zinit light zsh-users/zsh-syntax-highlighting
 
 # Must be loaded after syntax-highlighting and before augosuggestions and the prompt.
 zinit snippet OMZ::plugins/git/git.plugin.zsh
-zinit load 'zsh-users/zsh-history-substring-search'
+zinit light 'zsh-users/zsh-history-substring-search'
 # zinit ice wait atload"_history_substring_search_config"
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
@@ -268,7 +268,14 @@ bindkey -M vicmd 'j' history-substring-search-down
 # Must be loaded after syntax-highlighting, history-substring-search, and the prompt.
 zinit light zsh-users/zsh-autosuggestions
 
-zinit load 'djui/alias-tips'
+zinit light 'MichaelAquilina/zsh-you-should-use'
+
+zinit light 'MichaelAquilina/zsh-auto-notify'
+AUTO_NOTIFY_EXPIRE_TIME=7000
+AUTO_NOTIFY_THRESHOLD=10
+AUTO_NOTIFY_IGNORE+=(
+  'docker', 'htop', 'less', 'man', 'more', 'nano', 'nvim', 'ssh', 'tmux', 'top', 'vim', 'watch'
+)
 
 zinit snippet https://raw.githubusercontent.com/junegunn/fzf-git.sh/main/fzf-git.sh
 zinit snippet OMZP::colored-man-pages

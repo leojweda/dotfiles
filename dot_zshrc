@@ -255,6 +255,7 @@ zinit light zsh-users/zsh-autosuggestions
 
 zinit load 'djui/alias-tips'
 
+zinit snippet https://raw.githubusercontent.com/junegunn/fzf-git.sh/main/fzf-git.sh
 zinit snippet OMZP::colored-man-pages
 zinit snippet OMZP::encode64
 zinit snippet OMZP::man

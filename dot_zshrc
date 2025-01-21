@@ -28,6 +28,9 @@ if [[ $OSTYPE == linux* ]]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
+# Created by `pipx` on 2025-01-21 19:37:58
+export PATH="$PATH:/Users/leojweda/.local/bin"
+
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"

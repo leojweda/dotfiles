@@ -29,6 +29,9 @@ brew "wget"
 # brew "yubico-piv-tool"
 brew "zoxide"
 
+tap "oven-sh/bun"
+brew "bun"
+
 tap "homebrew/command-not-found"
 
 tap "jandedobbeleer/oh-my-posh"

@@ -17,7 +17,7 @@
           "background": "p:blue",
           "foreground": "p:base3",
           "properties": {
-            "style": "agnoster_full"
+            "style": "full"
           },
           "style": "powerline",
           "template": "{{ if not .Segments.Session.SSHSession }} {{ path .Path .Location }} {{ end }}",
@@ -28,7 +28,7 @@
           "foreground": "p:base3",
           "powerline_symbol": "\ue0b0",
           "properties": {
-            "style": "agnoster_full"
+            "style": "full"
           },
           "style": "powerline",
           "template": "{{ if .Segments.Session.SSHSession }} {{ path .Path .Location }} {{ end }}",

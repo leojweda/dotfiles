@@ -1,5 +1,17 @@
-[init]
-	defaultBranch = main
+[alias]
+	a = add
+
+	b = branch
+
+	c = commit
+	cm = commit -m
+
+	co = checkout
+	cob = checkout -b
+
+	d = diff
+
+	s = status
 
 [color]
 	ui = auto
@@ -40,11 +52,17 @@
 [gpg "ssh"]
 	program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
 
+[init]
+	defaultBranch = main
+
 [interactive]
     diffFilter = delta --color-only
 
 [merge]
     conflictstyle = zdiff3
+
+[mergetool "vscode"]
+	cmd = "code --wait "
 
 [push]
 	autoSetupRemote = true

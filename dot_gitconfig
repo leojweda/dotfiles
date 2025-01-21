@@ -11,6 +11,8 @@
 
 	d = diff
 
+	p = push
+
 	s = status
 
 [color]

@@ -40,4 +40,9 @@ tap "homebrew/command-not-found"
 tap "jandedobbeleer/oh-my-posh"
 brew "oh-my-posh"
 
+# https://github.com/artginzburg/sudo-touchid?tab=readme-ov-file
+# tap "artginzburg/tap"
+# brew "sudo-touchid"
+# sudo brew services start sudo-touchid
+
 # cask "ghostty"

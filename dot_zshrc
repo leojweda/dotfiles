@@ -279,8 +279,7 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 # Must be loaded before history-substring-search, autosuggestions, and the prompt.
 zinit light zsh-users/zsh-syntax-highlighting
 
-# Must be loaded after syntax-highlighting and before augosuggestions and the prompt.
-zinit snippet OMZ::plugins/git/git.plugin.zsh
+# Must be loaded after syntax-highlighting, but before augosuggestions and the prompt.
 zinit light 'zsh-users/zsh-history-substring-search'
 # zinit ice wait atload"_history_substring_search_config"
 bindkey '^[[A' history-substring-search-up
@@ -290,8 +289,16 @@ bindkey -M emacs '^N' history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
-# Must be loaded after syntax-highlighting, history-substring-search, and the prompt.
+# Must be loaded after syntax-highlighting and history-substring-search, but before the prompt.
 zinit light zsh-users/zsh-autosuggestions
+
+# Hook into Zsh's `precmd` to check and update the interface style before each prompt
+# precmd_functions+=(update_appearance)
+
+# Must be loaded after history-substring-search, autosuggestions, and augosuggestions.
+if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
+  eval "$(oh-my-posh init zsh --config ${XDG_CONFIG_HOME}/ohmyposh/base.json)"
+fi
 
 zinit light 'MichaelAquilina/zsh-you-should-use'
 
@@ -329,13 +336,6 @@ function osx-rm-dir-metadata {
     -type d -name '__MACOSX' \
   \) -print0 | xargs -0 rm -rf
 }
-
-# Hook into Zsh's `precmd` to check and update the interface style before each prompt
-# precmd_functions+=(update_appearance)
-
-if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
-  eval "$(oh-my-posh init zsh --config ${XDG_CONFIG_HOME}/ohmyposh/base.json)"
-fi
 
 ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=green'
 ZSH_HIGHLIGHT_STYLES[builtin]='fg=166'

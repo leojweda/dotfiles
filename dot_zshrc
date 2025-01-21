@@ -33,6 +33,15 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CACHE_HOME="$HOME/.cache"
 
+# Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='code'
+fi
+
+export VISUAL='code'
+
 export BAT_CONFIG_DIR="${XDG_CONFIG_HOME}/bat"
 
 # Function to detect interface style on macOS
@@ -300,6 +309,8 @@ zinit snippet OMZP::man
 zinit snippet OMZP::thefuck
 zinit snippet OMZP::tldr
 # zinit snippet OMZP::vi-mode
+
+eval $(thefuck --alias)
 
 # Makes a directory and changes to it.
 function mkdcd {

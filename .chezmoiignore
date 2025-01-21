@@ -1,3 +1,4 @@
 .github/
+.vscode/
 install.sh
 README.md

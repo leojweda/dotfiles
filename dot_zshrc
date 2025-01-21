@@ -35,27 +35,23 @@ export XDG_CACHE_HOME="$HOME/.cache"
 
 export BAT_CONFIG_DIR="${XDG_CONFIG_HOME}/bat"
 
+# Function to detect interface style on macOS
 function get_interface_style() {
-  if defaults read -g AppleInterfaceStyle 2>/dev/null | grep -q "Dark"; then
-    echo "dark";
+  if [[ $OSTYPE == darwin* ]]; then
+    if defaults read -g AppleInterfaceStyle 2>/dev/null | grep -q "Dark"; then
+      echo "dark"
+    else
+      echo "light"
+    fi
   else
-    echo "light";
-  fi
-}
-
-function get_appearance() {
-  background_color=$(xtermcontrol --get-bg)
-
-  if [[ $background_color == 'rgb:0000/2b2b/3636' || $background_color == 'rgb:0000/2b2b/3535' ]]; then
-    echo 'dark';
-  else
-    echo 'light';
+    echo ""  # Empty string for non-macOS environments
   fi
 }
 
 typeset -A ZSH_HIGHLIGHT_STYLES
 
 function update_appearance() {
+  # macOS-specific logic
   if [[ $OSTYPE == darwin* ]]; then
     new_interface_style=$(get_interface_style)
 
@@ -72,20 +68,28 @@ function update_appearance() {
         new_background_color='FDF6E2'
       fi
 
+      # Update Ghostty configuration
       sed -i '' "s/^background = ${old_background_color}/#background = ${old_background_color}/" "${XDG_CONFIG_HOME}/ghostty/config"
       sed -i '' "s/^#background = ${new_background_color}/background = ${new_background_color}/" "${XDG_CONFIG_HOME}/ghostty/config"
     fi
+
+    # Use interface style as appearance on macOS
+    export APPEARANCE=$INTERFACE_STYLE
+  else
+    # On non-macOS systems, require manual setup of APPEARANCE
+    if [[ -z $APPEARANCE ]]; then
+      echo "Error: APPEARANCE is not set. Please set it to 'light' or 'dark' manually." >&2
+      return 1
+    fi
   fi
 
-  new_appearance=$(get_appearance)
-
-  if [[ $APPEARANCE == $new_appearance ]]; then
-    return
+  # Load vivid LS_COLORS based on APPEARANCE
+  if vivid themes | grep -q "solarized-${APPEARANCE}"; then
+    export LS_COLORS="$(vivid generate solarized-${APPEARANCE})"
+  else
+    echo "Error: Theme solarized-${APPEARANCE} not found." >&2
+    return 1
   fi
-
-  export APPEARANCE=$new_appearance
-
-  export LS_COLORS="$(vivid generate solarized-${APPEARANCE})"
 
   if [[ $APPEARANCE == 'dark' ]]; then
     # Zsh Syntax Highlighting
@@ -154,7 +158,19 @@ function update_appearance() {
   sed -i '' "s|^set titlecolor .*|set titlecolor ${nano_emphasized_color},${nano_background_highlight_color}|" "${XDG_CONFIG_HOME}/nano/nanorc"
 }
 
-update_appearance
+# Function to set light appearance and trigger updates
+function set_light_appearance() {
+  export APPEARANCE="light"
+  update_appearance
+}
+
+# Function to set dark appearance and trigger updates
+function set_dark_appearance() {
+  export APPEARANCE="dark"
+  update_appearance
+}
+
+[[ $- == *i* ]] && update_appearance
 
 HISTFILE=~/.zsh_history
 HISTSIZE=10000

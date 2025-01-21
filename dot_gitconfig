@@ -46,6 +46,9 @@
 [merge]
     conflictstyle = zdiff3
 
+[push]
+	autoSetupRemote = true
+
 [user]
 	name = Leo Jweda
 	email = 792247+leojweda@users.noreply.github.com

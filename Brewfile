@@ -1,5 +1,6 @@
 # brew "1password-cli"
 brew "bat"
+brew "biome"
 brew "chezmoi"
 # brew "cloudflared"
 brew "eza"

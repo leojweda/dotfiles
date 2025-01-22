@@ -31,6 +31,8 @@ fi
 # Created by `pipx` on 2025-01-21 19:37:58
 export PATH="$PATH:/Users/leojweda/.local/bin"
 
+export PATH="$(brew --prefix)/opt/python@3/libexec/bin:$PATH"
+
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
@@ -203,7 +205,8 @@ setopt INTERACTIVE_COMMENTS
 alias k9='kill -9'
 
 alias ls='eza --icons --group-directories-first'
-alias ll='eza --icons --group-directories-first --git -l'
+alias ll='ls --git -l'
+alias la='ls --git -la'
 
 alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
 alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
@@ -269,6 +272,8 @@ eval "$(gh copilot alias -- zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 
 eval "$(mise activate zsh)"
+
+# eval "$(register-python-argcomplete pipx)"
 
 zinit light zsh-users/zsh-completions
 zinit light Aloxaf/fzf-tab

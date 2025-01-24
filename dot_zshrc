@@ -35,13 +35,6 @@ eval "$(register-python-argcomplete pipx)"
 
 zinit light 'MichaelAquilina/zsh-you-should-use'
 
-zinit light 'MichaelAquilina/zsh-auto-notify'
-AUTO_NOTIFY_EXPIRE_TIME=7000
-AUTO_NOTIFY_THRESHOLD=10
-AUTO_NOTIFY_IGNORE+=(
-  'docker', 'htop', 'less', 'man', 'more', 'nano', 'nvim', 'ssh', 'tmux', 'top', 'vim', 'watch'
-)
-
 zinit snippet https://raw.githubusercontent.com/junegunn/fzf-git.sh/main/fzf-git.sh
 zinit snippet OMZP::colored-man-pages
 zinit snippet OMZP::encode64

@@ -17,10 +17,10 @@ source "$ZSH_CONFIG_DIR/functions.zsh"
 
 source "$ZSH_CONFIG_DIR/fzf.zsh"
 
-# Must be loaded after env.zsh.
+# Must be loaded after env.zsh, but before prompt.zsh.
 source "$ZSH_CONFIG_DIR/plugins.zsh"
 
-# Must be loaded after history-substring-search, autosuggestions, and augosuggestions.
+# Must be loaded after plugins.zsh.
 source "$ZSH_CONFIG_DIR/prompt.zsh"
 
 eval "$(mise activate zsh)"
@@ -32,11 +32,3 @@ eval "$(gh copilot alias -- zsh)"
 eval $(thefuck --alias)
 
 eval "$(register-python-argcomplete pipx)"
-
-zinit snippet https://raw.githubusercontent.com/junegunn/fzf-git.sh/main/fzf-git.sh
-zinit snippet OMZP::colored-man-pages
-zinit snippet OMZP::encode64
-zinit snippet OMZP::man
-zinit snippet OMZP::thefuck
-zinit snippet OMZP::tldr
-# zinit snippet OMZP::vi-mode

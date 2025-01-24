@@ -33,8 +33,6 @@ eval $(thefuck --alias)
 
 eval "$(register-python-argcomplete pipx)"
 
-zinit light 'MichaelAquilina/zsh-you-should-use'
-
 zinit snippet https://raw.githubusercontent.com/junegunn/fzf-git.sh/main/fzf-git.sh
 zinit snippet OMZP::colored-man-pages
 zinit snippet OMZP::encode64

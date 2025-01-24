@@ -27,8 +27,6 @@ eval $(thefuck --alias)
 
 source "$ZSH_CONFIG_DIR/plugins.zsh"
 
-autoload -U compinit && compinit
-
 zinit light Aloxaf/fzf-tab
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 

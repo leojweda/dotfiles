@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        ".chezmoiignore": "ignore",
         "*.toml.tmpl": "ini",
         "*.sh.tmpl": "shellscript",
         "dot_*rc": "shellscript",

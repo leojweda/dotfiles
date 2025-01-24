@@ -134,4 +134,4 @@ function set_dark_appearance() {
 [[ $- == *i* ]] && update_appearance
 
 # Hook into Zsh's `precmd` to check and update the interface style before each prompt
-# precmd_functions+=(update_appearance)
+precmd_functions+=(update_appearance)

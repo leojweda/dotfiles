@@ -98,6 +98,12 @@
 					"type": "python"
 				},
 				{
+					"type": "docker",
+					"style": "plain",
+					"foreground": "p:blue",
+					"template": "  {{ .Context }} "
+				},
+				{
 					"type": "text",
 					"style": "plain",
 					"foreground": "p:yellow",

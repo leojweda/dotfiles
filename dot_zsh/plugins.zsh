@@ -13,4 +13,5 @@ source "$PLUGINS_DIR/zsh-autosuggestions.zsh"
 
 source "$PLUGINS_DIR/zsh-auto-notify.zsh"
 source "$PLUGINS_DIR/zsh-you-should-use.zsh"
+
 source "$PLUGINS_DIR/snippets.zsh"

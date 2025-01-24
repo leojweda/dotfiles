@@ -1,5 +1,6 @@
 # Must be loaded before history-substring-search, autosuggestions, and the prompt.
 zinit light zsh-users/zsh-syntax-highlighting
+
 ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=green'
 ZSH_HIGHLIGHT_STYLES[builtin]='fg=166'
 ZSH_HIGHLIGHT_STYLES[function]='fg=yellow'

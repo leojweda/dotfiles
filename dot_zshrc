@@ -17,13 +17,13 @@ source "$ZSH_CONFIG_DIR/functions.zsh"
 
 source "$ZSH_CONFIG_DIR/fzf.zsh"
 
+eval "$(mise activate zsh)"
+
 eval "$(zoxide init --cmd cd zsh)"
 
 eval "$(gh copilot alias -- zsh)"
 
 eval $(thefuck --alias)
-
-eval "$(mise activate zsh)"
 
 zinit light zsh-users/zsh-completions
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'

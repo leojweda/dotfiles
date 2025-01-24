@@ -15,6 +15,7 @@ source "$ZSH_CONFIG_DIR/aliases.zsh"
 
 source "$ZSH_CONFIG_DIR/functions.zsh"
 
+# Must be loaded before plugins.zsh.
 source "$ZSH_CONFIG_DIR/fzf.zsh"
 
 # Must be loaded after env.zsh and fzf.zsh, but before prompt.zsh.

@@ -20,6 +20,9 @@ source "$ZSH_CONFIG_DIR/fzf.zsh"
 # Must be loaded after env.zsh.
 source "$ZSH_CONFIG_DIR/plugins.zsh"
 
+# Must be loaded after history-substring-search, autosuggestions, and augosuggestions.
+source "$ZSH_CONFIG_DIR/prompt.zsh"
+
 eval "$(mise activate zsh)"
 
 eval "$(zoxide init --cmd cd zsh)"
@@ -76,6 +79,3 @@ zinit snippet OMZP::man
 zinit snippet OMZP::thefuck
 zinit snippet OMZP::tldr
 # zinit snippet OMZP::vi-mode
-
-# Must be loaded after history-substring-search, autosuggestions, and augosuggestions.
-source "$ZSH_CONFIG_DIR/prompt.zsh"

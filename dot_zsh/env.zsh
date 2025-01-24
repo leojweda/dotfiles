@@ -1,3 +1,4 @@
+# Must be loaded before appearance.zsh and plugins.zsh.
 # Created by `pipx` on 2025-01-21 19:37:58
 export PATH="$PATH:/Users/leojweda/.local/bin"
 

@@ -12,27 +12,47 @@ source "$ZSH_CONFIG_DIR/appearance.zsh"
 
 source "$ZSH_CONFIG_DIR/aliases.zsh"
 
-source "$ZSH_CONFIG_DIR/fzf.zsh"
+source "$ZSH_CONFIG_DIR/functions.zsh"
 
-eval "$(gh copilot alias -- zsh)"
+source "$ZSH_CONFIG_DIR/fzf.zsh"
 
 eval "$(zoxide init --cmd cd zsh)"
 
+eval "$(gh copilot alias -- zsh)"
+
+eval $(thefuck --alias)
+
 eval "$(mise activate zsh)"
 
-# eval "$(register-python-argcomplete pipx)"
-
 zinit light zsh-users/zsh-completions
-zinit light Aloxaf/fzf-tab
-autoload -U compinit && compinit
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 # TODO: Make the colours match the colours in eza.
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
+
+autoload -U compinit && compinit
+
+zinit light Aloxaf/fzf-tab
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+
+eval "$(register-python-argcomplete pipx)"
 
 # Must be loaded before history-substring-search, autosuggestions, and the prompt.
 zinit light zsh-users/zsh-syntax-highlighting
+ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=green'
+ZSH_HIGHLIGHT_STYLES[builtin]='fg=166'
+ZSH_HIGHLIGHT_STYLES[function]='fg=yellow'
+ZSH_HIGHLIGHT_STYLES[command]='fg=yellow'
+ZSH_HIGHLIGHT_STYLES[path]='fg=blue,underline'
+ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=61'
+ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=61'
+ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='fg=cyan'
+ZSH_HIGHLIGHT_STYLES[back-quoted-argument-delimiter]='fg=cyan'
+ZSH_HIGHLIGHT_STYLES[back-quoted-argument-unclosed]='fg=red,underline'
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=cyan'
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument-unclosed]='fg=red,underline'
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=cyan'
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument-unclosed]='fg=red,underline'
 
 # Must be loaded after syntax-highlighting, but before augosuggestions and the prompt.
 zinit light 'zsh-users/zsh-history-substring-search'
@@ -46,9 +66,6 @@ bindkey -M vicmd 'j' history-substring-search-down
 
 # Must be loaded after syntax-highlighting and history-substring-search, but before the prompt.
 zinit light zsh-users/zsh-autosuggestions
-
-# Must be loaded after history-substring-search, autosuggestions, and augosuggestions.
-source "$ZSH_CONFIG_DIR/prompt.zsh"
 
 zinit light 'MichaelAquilina/zsh-you-should-use'
 
@@ -67,21 +84,5 @@ zinit snippet OMZP::thefuck
 zinit snippet OMZP::tldr
 # zinit snippet OMZP::vi-mode
 
-eval $(thefuck --alias)
-
-source "$ZSH_CONFIG_DIR/functions.zsh"
-
-ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=green'
-ZSH_HIGHLIGHT_STYLES[builtin]='fg=166'
-ZSH_HIGHLIGHT_STYLES[function]='fg=yellow'
-ZSH_HIGHLIGHT_STYLES[command]='fg=yellow'
-ZSH_HIGHLIGHT_STYLES[path]='fg=blue,underline'
-ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=61'
-ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=61'
-ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='fg=cyan'
-ZSH_HIGHLIGHT_STYLES[back-quoted-argument-delimiter]='fg=cyan'
-ZSH_HIGHLIGHT_STYLES[back-quoted-argument-unclosed]='fg=red,underline'
-ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=cyan'
-ZSH_HIGHLIGHT_STYLES[single-quoted-argument-unclosed]='fg=red,underline'
-ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=cyan'
-ZSH_HIGHLIGHT_STYLES[double-quoted-argument-unclosed]='fg=red,underline'
+# Must be loaded after history-substring-search, autosuggestions, and augosuggestions.
+source "$ZSH_CONFIG_DIR/prompt.zsh"

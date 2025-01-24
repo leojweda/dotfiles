@@ -5,7 +5,7 @@ source "$ZSH_CONFIG_DIR/zinit.zsh"
 
 source "$ZSH_CONFIG_DIR/homebrew.zsh"
 
-# Must be loaded before appearance.zsh.
+# Must be loaded before appearance.zsh and plugins.zsh.
 source "$ZSH_CONFIG_DIR/env.zsh"
 
 # Must be loaded after env.zsh.
@@ -17,6 +17,9 @@ source "$ZSH_CONFIG_DIR/functions.zsh"
 
 source "$ZSH_CONFIG_DIR/fzf.zsh"
 
+# Must be loaded after env.zsh.
+source "$ZSH_CONFIG_DIR/plugins.zsh"
+
 eval "$(mise activate zsh)"
 
 eval "$(zoxide init --cmd cd zsh)"
@@ -24,11 +27,6 @@ eval "$(zoxide init --cmd cd zsh)"
 eval "$(gh copilot alias -- zsh)"
 
 eval $(thefuck --alias)
-
-source "$ZSH_CONFIG_DIR/plugins.zsh"
-
-zinit light Aloxaf/fzf-tab
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 
 eval "$(register-python-argcomplete pipx)"
 

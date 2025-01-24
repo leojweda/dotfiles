@@ -2,52 +2,13 @@ export ZSH_CONFIG_DIR="$HOME/.zsh"
 
 source "$ZSH_CONFIG_DIR/zinit.zsh"
 
-export HOMEBREW_NO_ANALYTICS=1
+source "$ZSH_CONFIG_DIR/homebrew.zsh"
 
-if [[ $OSTYPE == linux* ]]; then
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-fi
+# Must be loaded before appearance.zsh.
+source "$ZSH_CONFIG_DIR/env.zsh"
 
-# Created by `pipx` on 2025-01-21 19:37:58
-export PATH="$PATH:/Users/leojweda/.local/bin"
-
-export PATH="$(brew --prefix)/opt/python@3/libexec/bin:$PATH"
-
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_STATE_HOME="$HOME/.local/state"
-export XDG_CACHE_HOME="$HOME/.cache"
-
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='code'
-fi
-
-export VISUAL='code'
-
-export BAT_CONFIG_DIR="${XDG_CONFIG_HOME}/bat"
-
-typeset -A ZSH_HIGHLIGHT_STYLES
-
+# Must be loaded after env.zsh.
 source "$ZSH_CONFIG_DIR/appearance.zsh"
-
-HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=$HISTSIZE
-
-setopt EXTENDED_HISTORY
-setopt SHARE_HISTORY
-setopt HIST_IGNORE_DUPS
-setopt HIST_IGNORE_ALL_DUPS
-setopt HIST_FIND_NO_DUPS
-setopt HIST_IGNORE_SPACE
-setopt HIST_SAVE_NO_DUPS
-setopt HIST_VERIFY
-setopt HIST_BEEP
-
-setopt INTERACTIVE_COMMENTS
 
 source "$ZSH_CONFIG_DIR/aliases.zsh"
 
@@ -124,9 +85,3 @@ ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=cyan'
 ZSH_HIGHLIGHT_STYLES[single-quoted-argument-unclosed]='fg=red,underline'
 ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=cyan'
 ZSH_HIGHLIGHT_STYLES[double-quoted-argument-unclosed]='fg=red,underline'
-
-# Homebrew Command Not Found
-HB_CNF_HANDLER="$(brew --repository)/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
-if [ -f "$HB_CNF_HANDLER" ]; then
-  source "$HB_CNF_HANDLER";
-fi

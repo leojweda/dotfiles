@@ -17,7 +17,7 @@ source "$ZSH_CONFIG_DIR/functions.zsh"
 
 source "$ZSH_CONFIG_DIR/fzf.zsh"
 
-# Must be loaded after env.zsh, but before prompt.zsh.
+# Must be loaded after env.zsh and fzf.zsh, but before prompt.zsh.
 source "$ZSH_CONFIG_DIR/plugins.zsh"
 
 # Must be loaded after plugins.zsh.

@@ -7,3 +7,5 @@ source "$PLUGINS_DIR/fzf-tab.zsh"
 source "$PLUGINS_DIR/zsh-syntax-highlighting.zsh"
 # Must be loaded after syntax-highlighting, but before augosuggestions and the prompt.
 source "$PLUGINS_DIR/zsh-history-substring-search.zsh"
+# Must be loaded after syntax-highlighting and history-substring-search, but before the prompt.
+zinit light 'zsh-users/zsh-autosuggestions'

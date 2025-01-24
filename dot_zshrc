@@ -25,11 +25,7 @@ eval "$(gh copilot alias -- zsh)"
 
 eval $(thefuck --alias)
 
-zinit light zsh-users/zsh-completions
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-# TODO: Make the colours match the colours in eza.
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-zstyle ':completion:*' menu no
+source "$ZSH_CONFIG_DIR/plugins.zsh"
 
 autoload -U compinit && compinit
 

@@ -1,5 +1,6 @@
 export ZSH_CONFIG_DIR="$HOME/.zsh"
 
+# Must be loaded first.
 source "$ZSH_CONFIG_DIR/zinit.zsh"
 
 source "$ZSH_CONFIG_DIR/homebrew.zsh"

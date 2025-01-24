@@ -5,3 +5,5 @@ source "$PLUGINS_DIR/zsh-completions.zsh"
 source "$PLUGINS_DIR/fzf-tab.zsh"
 # Must be loaded before history-substring-search, autosuggestions, and the prompt.
 source "$PLUGINS_DIR/zsh-syntax-highlighting.zsh"
+# Must be loaded after syntax-highlighting, but before augosuggestions and the prompt.
+source "$PLUGINS_DIR/zsh-history-substring-search.zsh"

@@ -91,7 +91,9 @@ function update_appearance() {
   if [ -n "$TMUX" ]; then
     status_bar_background_color=$tmux_background_highlight_color
 
-    status_bar_left_content="#[fg=${tmux_text_color},bg=${tmux_background_color},bold] #S:#I.#P "
+    tmux set -g status-style bg=${status_bar_background_color}
+
+    status_bar_left_content="#[fg=${tmux_text_color},bg=${tmux_background_color}] #S:#I.#P "
     status_bar_left_suffix="#[fg=${tmux_background_color},bg=${status_bar_background_color}]"
     tmux set -g status-left "${status_bar_left_content}${status_bar_left_suffix}"
 

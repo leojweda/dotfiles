@@ -9,7 +9,7 @@
 					"background": "p:yellow",
 					"foreground": "p:base3",
 					"style": "diamond",
-					"template": " {{ if .SSHSession }}\ueba9 {{ end }}{{ if or .SSHSession .Root }}{{ .UserName }}{{end}}{{ if .SSHSession }}@{{ .HostName }}{{ end }} ",
+					"template": " {{ if eq .Env.TMUX \"\" }}{{ if .SSHSession }}\ueba9 {{ end }}{{ if or .SSHSession .Root }}{{ .UserName }}{{end}}{{ if .SSHSession }}@{{ .HostName }}{{ end }}{{ end }} ",
 					"trailing_diamond": "\ue0b0",
 					"type": "session"
 				},

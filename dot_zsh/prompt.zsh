@@ -4,5 +4,5 @@ if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
 fi
 
 function set_poshcontext() {
-    export BG_JOBS=$(jobs|wc -l|xargs)
+  export BG_JOBS=$(jobs|wc -l|xargs)
 }

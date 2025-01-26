@@ -7,7 +7,7 @@
 			"segments": [
 				{
 					"background": "p:yellow",
-					"foreground": "p:base03",
+					"foreground": "p:base3",
 					"style": "diamond",
 					"template": " {{ if .SSHSession }}\ueba9 {{ end }}{{ if or .SSHSession .Root }}{{ .UserName }}{{end}}{{ if .SSHSession }}@{{ .HostName }}{{ end }} ",
 					"trailing_diamond": "\ue0b0",
@@ -42,9 +42,9 @@
 						"{{ if gt .Ahead 0 }}p:violet{{ end }}",
 						"{{ if gt .Behind 0 }}p:magenta{{ end }}"
 					],
-					"foreground": "p:base03",
+					"foreground": "p:base3",
 					"foreground_templates": [
-						"{{ if or (.Working.Changed) (.Staging.Changed) }}p:base03{{ end }}",
+						"{{ if or (.Working.Changed) (.Staging.Changed) }}p:base3{{ end }}",
 						"{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:base3{{ end }}",
 						"{{ if gt .Ahead 0 }}p:base3{{ end }}"
 					],

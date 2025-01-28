@@ -93,26 +93,30 @@ function update_appearance() {
 
     tmux set -g status-style bg=${status_bar_background_color}
 
-    status_bar_left_content="#[fg=${tmux_text_color},bg=${tmux_background_color}] #S:#I.#P "
-    status_bar_left_suffix="#[fg=${tmux_background_color},bg=${status_bar_background_color}]"
+    status_bar_left_background_color=$tmux_background_color
+    status_bar_left_content="#[fg=${tmux_text_color},bg=${status_bar_left_background_color}] #S:#I.#P "
+    status_bar_left_suffix="#[fg=${status_bar_left_background_color},bg=${status_bar_background_color}]"
     tmux set -g status-left "${status_bar_left_content}${status_bar_left_suffix}"
 
-    window_prefix="#[fg=${status_bar_background_color},bg=${tmux_background_color}]#{?#{==:#{window_index},1},,}"
-    window_content="#[fg=${tmux_text_color},bg=${tmux_background_color}] #I#F #W"
-    window_suffix="#[fg=${tmux_background_color},bg=${status_bar_background_color}]#{?#{==:#{window_index},#{session_windows}},,}"
+    window_background_color=$status_bar_background_color
+    window_separator_color=$tmux_background_color
+    window_prefix="#[fg=${window_separator_color},bg=${window_background_color}]#{?#{==:#{window_index},1},,}"
+    window_content="#[fg=${tmux_text_color},bg=${window_background_color}] #I#F #W"
+    window_suffix="#[fg=${window_separator_color},bg=${window_background_color}]#{?#{==:#{window_index},#{session_windows}},,}"
     tmux setw -g window-status-format "${window_prefix}${window_content}${window_suffix}"
 
-    current_window_prefix="#[fg=${tmux_background_highlight_color},bg=${tmux_background_color}]#{?#{==:#{window_index},1},,}#[fg=${tmux_background_color},bg=${status_bar_background_color}]#{?#{==:#{window_index},1},,}"
-    current_window_content="#[fg=${tmux_text_color},bg=${tmux_background_highlight_color}] #I#F #W "
-    current_window_suffix="#{?#{==:#{window_index},#{session_windows}},#[fg=${tmux_background_color}]#[bg=${status_bar_background_color}],#[fg=${tmux_background_highlight_color}]#[bg=${tmux_background_color}]}"
+    current_window_background_color=$tmux_background_color
+    current_window_prefix="#{?#{==:#{window_index},1},#[fg=${status_bar_background_color}]#[bg=${current_window_background_color}],#[fg=${window_separator_color}]#[bg=${window_background_color}]#[fg=${window_background_color}]#[bg=${current_window_background_color}]}"
+    current_window_content="#[fg=${tmux_text_color},bg=${current_window_background_color}] #I#F #W "
+    current_window_suffix="#[fg=${current_window_background_color}]#[bg=${window_background_color}]"
     tmux setw -g window-status-current-format "${current_window_prefix}${current_window_content}${current_window_suffix}"
 
     if [[ -n $SSH_CONNECTION ]]; then
-      status_right_session_background_color='color136'
-      status_right_session_foreground_color='color230'
+      status_right_background_color='color136'
+      status_rightforeground_color='color230'
 
-      status_right_session_suffix="#[fg=${status_right_session_background_color},bg=${status_bar_background_color}]"
-      status_right_session="#[fg=${status_right_session_foreground_color},bg=${status_right_session_background_color}] #(whoami)@#H "
+      status_right_session_suffix="#[fg=${status_right_background_color},bg=${status_bar_background_color}]"
+      status_right_session="#[fg=${status_rightforeground_color},bg=${status_right_background_color}] #(whoami)@#H "
       tmux set -g status-right "${status_right_session_suffix}${status_right_session}"
     else
       tmux set -g status-right ""

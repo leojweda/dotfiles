@@ -1,7 +1,7 @@
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
 
-export FZF_DEFAULT_OPTS_FILE=~/.fzfrc
+export FZF_DEFAULT_OPTS_FILE="${XDG_CONFIG_HOME}/fzf/fzfrc"
 export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always --line-range :500 {}'"

@@ -24,6 +24,8 @@ source "$ZDOTDIR/bat.zsh"
 
 source "$ZDOTDIR/tmux.zsh"
 
+source "$ZDOTDIR/tlrc.zsh"
+
 source "$ZDOTDIR/aliases.zsh"
 
 source "$ZDOTDIR/functions.zsh"

@@ -91,6 +91,9 @@ function update_appearance() {
   if [ -n "$TMUX" ]; then
     status_bar_background_color=$tmux_background_highlight_color
 
+    is_first_window="#{==:#{window_index},1}"
+    is_last_window="#{==:#{window_index},#{session_windows}}"
+
     tmux set -g status-style bg=${status_bar_background_color}
 
     status_bar_left_background_color=$tmux_background_color
@@ -100,13 +103,15 @@ function update_appearance() {
 
     window_background_color=$status_bar_background_color
     window_separator_color=$tmux_background_color
-    window_prefix="#[fg=${window_separator_color},bg=${window_background_color}]#{?#{==:#{window_index},1},,}"
+    is_previous_window_active="#{==:#{window_index},#{@TMUX_NEXT_WINDOW_INDEX}}"
+    is_next_window_active="#{==:#{window_index},#{@TMUX_PREVIOUS_WINDOW_INDEX}}"
+    window_prefix="#[fg=${window_separator_color},bg=${window_background_color}]#{?${is_first_window},,#{?${is_previous_window_active},,}}"
     window_content="#[fg=${tmux_text_color},bg=${window_background_color}] #I#F #W"
-    window_suffix="#[fg=${window_separator_color},bg=${window_background_color}]#{?#{==:#{window_index},#{session_windows}},,}"
+    window_suffix="#[fg=${window_separator_color},bg=${window_background_color}]#{?${is_last_window},#{?${is_next_window_active},),}},}"
     tmux setw -g window-status-format "${window_prefix}${window_content}${window_suffix}"
 
     current_window_background_color=$tmux_background_color
-    current_window_prefix="#{?#{==:#{window_index},1},#[fg=${status_bar_background_color}]#[bg=${current_window_background_color}],#[fg=${window_separator_color}]#[bg=${window_background_color}]#[fg=${window_background_color}]#[bg=${current_window_background_color}]}"
+    current_window_prefix="#{?${is_first_window},#[fg=${status_bar_background_color}]#[bg=${current_window_background_color}],#[fg=${window_background_color}]#[bg=${current_window_background_color}]}"
     current_window_content="#[fg=${tmux_text_color},bg=${current_window_background_color}] #I#F #W "
     current_window_suffix="#[fg=${current_window_background_color}]#[bg=${window_background_color}]"
     tmux setw -g window-status-current-format "${current_window_prefix}${current_window_content}${current_window_suffix}"

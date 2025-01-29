@@ -1,4 +1,4 @@
-export PLUGINS_DIR="$HOME/.zsh/plugins"
+export PLUGINS_DIR="$ZDOTDIR/plugins"
 
 source "$PLUGINS_DIR/zsh-completions.zsh"
 # Must be loaded after zsh-completions.

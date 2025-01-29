@@ -133,6 +133,8 @@ function update_appearance() {
       leader_key_pressed_content="#[fg=${leader_key_indicator_color}]#[bg=${status_bar_background_color}]#[fg=${tmux_background_color}]#[bg=${leader_key_indicator_color}]^; "
       tmux set -g status-right "#{?${is_leader_key_pressed},${leader_key_pressed_content},}"
     fi
+
+    source ~/.tmux/update_window_indices.sh
   fi
 
   sed -i '' "s|^set keycolor .*|set keycolor ${nano_body_text_color},${nano_background_highlight_color}|" "${XDG_CONFIG_HOME}/nano/nanorc"

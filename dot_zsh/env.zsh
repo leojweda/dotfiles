@@ -18,8 +18,6 @@ fi
 
 export VISUAL='code'
 
-export BAT_CONFIG_DIR="${XDG_CONFIG_HOME}/bat"
-
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=$HISTSIZE
@@ -35,5 +33,3 @@ setopt HIST_VERIFY
 setopt HIST_BEEP
 
 setopt INTERACTIVE_COMMENTS
-
-typeset -A ZSH_HIGHLIGHT_STYLES

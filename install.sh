@@ -21,12 +21,12 @@ if ! command -v brew; then
 	fi
 fi
 
-echo '📦  Installing dependencies' >&2 && \
-brew update && \
-brew bundle --file=~/.config/brew/Brewfile
-
 # POSIX way to get script's dir: https://stackoverflow.com/a/29834779/12156188
 script_dir="$(cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)"
+
+echo '📦  Installing dependencies' >&2 && \
+brew update && \
+brew bundle --file="${script_dir}/dot_config/brew/Brewfile"
 
 set -- init --apply --source="${script_dir}"
 

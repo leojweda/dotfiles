@@ -5,17 +5,17 @@ source "$ZSH_CONFIG_DIR/zinit.zsh"
 
 source "$ZSH_CONFIG_DIR/homebrew.zsh"
 
-# Must be loaded before appearance.zsh and plugins.zsh.
+# Must be loaded before fzf.sh, plugins.zsh, and appearance.zsh.
 source "$ZSH_CONFIG_DIR/env.zsh"
 
-# Must be loaded after env.zsh.
-source "$ZSH_CONFIG_DIR/appearance.zsh"
-
-# Must be loaded before plugins.zsh.
+# Must be loaded after env.zsh, but before plugins.zsh.
 source "$ZSH_CONFIG_DIR/fzf.zsh"
 
 # Must be loaded after env.zsh and fzf.zsh, but before prompt.zsh.
 source "$ZSH_CONFIG_DIR/plugins.zsh"
+
+# Must be loaded after env.zsh.
+source "$ZSH_CONFIG_DIR/appearance.zsh"
 
 # Must be loaded after plugins.zsh.
 source "$ZSH_CONFIG_DIR/prompt.zsh"

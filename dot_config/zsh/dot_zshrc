@@ -29,6 +29,8 @@ source "$ZDOTDIR/tlrc.zsh"
 
 source "$ZDOTDIR/tmux.zsh"
 
+source "$ZDOTDIR/wget.zsh"
+
 eval "$(mise activate zsh)"
 
 eval "$(zoxide init --cmd cd zsh)"

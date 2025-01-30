@@ -1,5 +1,3 @@
-# Must be loaded before fzf.sh, prompt.zsh, appearance.zsh, homebrew.zsh, and bat.zsh.
-
 # Created by `pipx` on 2025-01-21 19:37:58
 export PATH="$PATH:/Users/leojweda/.local/bin"
 

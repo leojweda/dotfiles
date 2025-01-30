@@ -1,25 +1,22 @@
 # Must be loaded first.
 source "$ZDOTDIR/zinit.zsh"
 
-# Must be loaded before fzf.sh, prompt.zsh, appearance.zsh, homebrew.zsh, and bat.zsh.
 source "$ZDOTDIR/env.zsh"
 
-# Must be loaded after env.zsh, but before plugins.zsh.
+# Must be loaded before plugins.zsh.
 source "$ZDOTDIR/fzf.zsh"
 
 # Must be loaded after fzf.zsh, but before prompt.zsh.
 source "$ZDOTDIR/plugins.zsh"
 
-# Must be loaded after env.zsh and plugins.zsh.
+# Must be loaded after plugins.zsh.
 source "$ZDOTDIR/prompt.zsh"
 
-# Must be loaded after env.zsh and plugins.zsh.
+# Must be loaded after plugins.zsh.
 source "$ZDOTDIR/appearance.zsh"
 
-# Must be loaded after env.zsh.
 source "$ZDOTDIR/homebrew.zsh"
 
-# Must be loaded after env.zsh.
 source "$ZDOTDIR/bat.zsh"
 
 source "$ZDOTDIR/tmux.zsh"

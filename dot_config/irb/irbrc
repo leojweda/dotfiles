@@ -1,4 +1,6 @@
+require 'irb/completion'
+
 XDG_IRB_HISTORY = "#{ENV['XDG_DATA_HOME']}/irb/history"
 IRB.conf[:HISTORY_FILE] = XDG_IRB_HISTORY
 
-IRB.conf[:SAVE_HISTORY] = 10000
+IRB.conf[:SAVE_HISTORY] = 10_000

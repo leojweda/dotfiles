@@ -1,3 +1,5 @@
+# Must be loaded after fzf.zsh, but before prompt.zsh.
+
 export PLUGINS_DIR="$ZDOTDIR/plugins"
 
 source "$PLUGINS_DIR/zsh-completions.zsh"

@@ -4,11 +4,6 @@ export PATH="$PATH:/Users/leojweda/.local/bin"
 
 export PATH="$(brew --prefix)/opt/python@3/libexec/bin:$PATH"
 
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_STATE_HOME="$HOME/.local/state"
-export XDG_CACHE_HOME="$HOME/.cache"
-
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'

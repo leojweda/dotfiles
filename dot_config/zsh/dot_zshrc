@@ -25,6 +25,8 @@ source "$ZDOTDIR/homebrew.zsh"
 
 source "$ZDOTDIR/less.zsh"
 
+source "$ZDOTDIR/node.zsh"
+
 source "$ZDOTDIR/python.zsh"
 
 source "$ZDOTDIR/tlrc.zsh"

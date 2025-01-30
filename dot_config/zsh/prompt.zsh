@@ -1,4 +1,7 @@
+# Must be loaded after env.zsh and plugins.zsh.
+
 # Must be loaded after history-substring-search, autosuggestions, and augosuggestions.
+
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
   eval "$(oh-my-posh init zsh --config ${XDG_CONFIG_HOME}/ohmyposh/base.json)"
 fi

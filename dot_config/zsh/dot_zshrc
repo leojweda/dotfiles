@@ -15,17 +15,19 @@ source "$ZDOTDIR/prompt.zsh"
 # Must be loaded after plugins.zsh.
 source "$ZDOTDIR/appearance.zsh"
 
-source "$ZDOTDIR/homebrew.zsh"
-
-source "$ZDOTDIR/bat.zsh"
-
-source "$ZDOTDIR/tmux.zsh"
-
-source "$ZDOTDIR/tlrc.zsh"
-
 source "$ZDOTDIR/aliases.zsh"
 
 source "$ZDOTDIR/functions.zsh"
+
+source "$ZDOTDIR/bat.zsh"
+
+source "$ZDOTDIR/homebrew.zsh"
+
+source "$ZDOTDIR/less.zsh"
+
+source "$ZDOTDIR/tlrc.zsh"
+
+source "$ZDOTDIR/tmux.zsh"
 
 eval "$(mise activate zsh)"
 

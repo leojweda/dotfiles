@@ -1,5 +1,5 @@
 export HOMEBREW_NO_ANALYTICS=1
-export HOMEBREW_NO_ENV_HINTS=0
+export HOMEBREW_NO_ENV_HINTS=
 export HOMEBREW_BUNDLE_FILE="$XDG_CONFIG_HOME/brew/Brewfile"
 
 if [[ $OSTYPE == linux* ]]; then

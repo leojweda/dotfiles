@@ -1,4 +1,5 @@
-# Set up fzf key bindings and fuzzy completion
+# Must be loaded after env.zsh, but before plugins.zsh.
+
 source <(fzf --zsh)
 
 export FZF_DEFAULT_OPTS_FILE="${XDG_CONFIG_HOME}/fzf/fzfrc"

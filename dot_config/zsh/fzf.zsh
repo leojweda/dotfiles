@@ -1,4 +1,4 @@
-# Must be loaded after env.zsh, but before plugins.zsh.
+# Must be loaded before plugins.zsh.
 
 source <(fzf --zsh)
 

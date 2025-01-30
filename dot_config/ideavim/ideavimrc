@@ -1,4 +1,4 @@
 let mapleader = "\\";
 Plug 'easymotion/vim-easymotion'
 
-source "${XDG_CONFIG_HOME}/vim/vimrc"
+source "${XDG_CONFIG_HOME}/vim/shared.vim"

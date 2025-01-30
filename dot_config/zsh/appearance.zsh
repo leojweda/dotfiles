@@ -1,3 +1,7 @@
+# Must be loaded after env.zsh and plugins.zsh.
+
+# Must be loaded before zsh-syntax-highlighting.
+
 # Function to detect interface style on macOS
 function get_interface_style() {
   if [[ $OSTYPE == darwin* ]]; then

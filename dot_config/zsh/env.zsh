@@ -1,8 +1,6 @@
 # Created by `pipx` on 2025-01-21 19:37:58
 export PATH="$PATH:/Users/leojweda/.local/bin"
 
-export PATH="$(brew --prefix)/opt/python@3/libexec/bin:$PATH"
-
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'

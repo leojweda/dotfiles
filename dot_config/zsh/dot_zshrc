@@ -3,6 +3,8 @@ source "$ZDOTDIR/zinit.zsh"
 
 source "$ZDOTDIR/env.zsh"
 
+source "$ZDOTDIR/homebrew.zsh"
+
 # Must be loaded before plugins.zsh.
 source "$ZDOTDIR/fzf.zsh"
 
@@ -20,8 +22,6 @@ source "$ZDOTDIR/aliases.zsh"
 source "$ZDOTDIR/functions.zsh"
 
 source "$ZDOTDIR/bat.zsh"
-
-source "$ZDOTDIR/homebrew.zsh"
 
 source "$ZDOTDIR/less.zsh"
 

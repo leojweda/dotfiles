@@ -5,6 +5,6 @@ if [[ $OSTYPE == darwin* ]]; then
     # End added by argcomplete
 elif [[ $OSTYPE == linux* ]]; then
     # Begin added by argcomplete
-    fpath=( /home/linuxbrew/.linuxbrew/Cellar/python-argcomplete/3.5.3/libexec/lib/python3.13/site-packages/argcomplete/bash_completion.d "${fpath[@]}"
+    fpath=( /home/linuxbrew/.linuxbrew/Cellar/python-argcomplete/3.5.3/libexec/lib/python3.13/site-packages/argcomplete/bash_completion.d "${fpath[@]}")
     # End added by argcomplete
 fi

@@ -22,20 +22,6 @@ function update_appearance() {
 
     if [[ $INTERFACE_STYLE != $new_interface_style ]]; then
       export INTERFACE_STYLE=$new_interface_style
-
-      if [[ $INTERFACE_STYLE == 'dark' ]]; then
-        # Ghostty
-        old_background_color='FDF6E2'
-        new_background_color='002B35'
-      else
-        # Ghostty
-        old_background_color='002B35'
-        new_background_color='FDF6E2'
-      fi
-
-      # Update Ghostty configuration
-      sed -i '' "s/^background = ${old_background_color}/#background = ${old_background_color}/" "${XDG_CONFIG_HOME}/ghostty/config"
-      sed -i '' "s/^#background = ${new_background_color}/background = ${new_background_color}/" "${XDG_CONFIG_HOME}/ghostty/config"
     fi
 
     # Use interface style as appearance on macOS

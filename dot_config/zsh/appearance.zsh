@@ -3,7 +3,7 @@
 # Must be loaded before zsh-syntax-highlighting.
 
 # Function to detect interface style on macOS
-function get_appearance() {
+function get_interface_style() {
   if [[ $OSTYPE == darwin* ]]; then
     if defaults read -g AppleInterfaceStyle 2>/dev/null | grep -q "Dark"; then
       echo "dark"
@@ -127,9 +127,15 @@ function update_appearance() {
     source ~/.config/tmux/update_window_indices.sh
   fi
 
-  sed -i '' "s|^set keycolor .*|set keycolor ${nano_body_text_color},${nano_background_highlight_color}|" "${XDG_CONFIG_HOME}/nano/nanorc"
-  sed -i '' "s|^set numbercolor .*|set numbercolor ${nano_comment_color},${nano_background_highlight_color}|" "${XDG_CONFIG_HOME}/nano/nanorc"
-  sed -i '' "s|^set titlecolor .*|set titlecolor ${nano_emphasized_color},${nano_background_highlight_color}|" "${XDG_CONFIG_HOME}/nano/nanorc"
+  if [[ $OSTYPE == darwin* ]]; then
+    sed -i '' "s|^set keycolor .*|set keycolor ${nano_body_text_color},${nano_background_highlight_color}|" "${XDG_CONFIG_HOME}/nano/nanorc"
+    sed -i '' "s|^set numbercolor .*|set numbercolor ${nano_comment_color},${nano_background_highlight_color}|" "${XDG_CONFIG_HOME}/nano/nanorc"
+    sed -i '' "s|^set titlecolor .*|set titlecolor ${nano_emphasized_color},${nano_background_highlight_color}|" "${XDG_CONFIG_HOME}/nano/nanorc"
+  else
+    sed -i "s|^set keycolor .*|set keycolor ${nano_body_text_color},${nano_background_highlight_color}|" "${XDG_CONFIG_HOME}/nano/nanorc"
+    sed -i "s|^set numbercolor .*|set numbercolor ${nano_comment_color},${nano_background_highlight_color}|" "${XDG_CONFIG_HOME}/nano/nanorc"
+    sed -i "s|^set titlecolor .*|set titlecolor ${nano_emphasized_color},${nano_background_highlight_color}|" "${XDG_CONFIG_HOME}/nano/nanorc"
+  fi
 }
 
 # Function to set light appearance and trigger updates
@@ -137,6 +143,11 @@ function set_light_appearance() {
   export APPEARANCE="light"
   update_appearance
 }
+
+# Call `set_light_appearance` on non-macOS systems before `update_appearance`
+if [[ $OSTYPE != darwin* ]]; then
+  set_light_appearance
+fi
 
 # Function to set dark appearance and trigger updates
 function set_dark_appearance() {

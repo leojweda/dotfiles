@@ -40,6 +40,9 @@ brew "bun"
 
 tap "homebrew/command-not-found"
 
+tap "cormacrelf/tap"
+brew "dark-notify"
+
 tap "jandedobbeleer/oh-my-posh"
 brew "oh-my-posh"
 

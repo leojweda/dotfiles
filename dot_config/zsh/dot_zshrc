@@ -23,6 +23,8 @@ source "$ZDOTDIR/functions.zsh"
 
 source "$ZDOTDIR/bat.zsh"
 
+source "$ZDOTDIR/gh.zsh"
+
 source "$ZDOTDIR/less.zsh"
 
 source "$ZDOTDIR/node.zsh"
@@ -38,8 +40,6 @@ source "$ZDOTDIR/wget.zsh"
 eval "$(mise activate zsh)"
 
 eval "$(zoxide init --cmd cd zsh)"
-
-eval "$(gh copilot alias -- zsh)"
 
 eval $(thefuck --alias)
 

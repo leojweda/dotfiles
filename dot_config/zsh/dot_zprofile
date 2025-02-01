@@ -1,6 +1,5 @@
 if [[ $OSTYPE == darwin* ]]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ $OSTYPE == linux* ]]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
-
-# Created by `pipx` on 2025-01-21 19:37:58
-export PATH="$PATH:/Users/leojweda/.local/bin"

@@ -1,5 +1,3 @@
-#background = FDF6E2
-background = 002B35
 background-opacity = 0.96
 cursor-color = red
 initial-window = false
@@ -8,6 +6,6 @@ macos-option-as-alt = true
 #quick-terminal-autohide = false
 quick-terminal-screen = macos-menu-bar
 theme = light:"iTerm2 Solarized Light",dark:"iTerm2 Solarized Dark"
-unfocused-split-opacity = 0.95
+unfocused-split-opacity = 0.96
 window-colorspace = display-p3
 window-step-resize = true

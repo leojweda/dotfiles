@@ -5,7 +5,7 @@ source "$ZDOTDIR/env.zsh"
 
 source "$ZDOTDIR/homebrew.zsh"
 
-# Must be loaded before plugins.zsh.
+# Must be loaded after homebrew.zsh, but before plugins.zsh.
 source "$ZDOTDIR/fzf.zsh"
 
 # Must be loaded after fzf.zsh, but before prompt.zsh.
@@ -21,15 +21,21 @@ source "$ZDOTDIR/aliases.zsh"
 
 source "$ZDOTDIR/functions.zsh"
 
+source "$ZDOTDIR/argcomplete.zsh"
+
 source "$ZDOTDIR/bat.zsh"
 
 source "$ZDOTDIR/gh.zsh"
 
 source "$ZDOTDIR/less.zsh"
 
+source "$ZDOTDIR/mise.zsh"
+
 source "$ZDOTDIR/node.zsh"
 
 source "$ZDOTDIR/python.zsh"
+
+source "$ZDOTDIR/thefuck.zsh"
 
 source "$ZDOTDIR/tlrc.zsh"
 
@@ -37,10 +43,4 @@ source "$ZDOTDIR/tmux.zsh"
 
 source "$ZDOTDIR/wget.zsh"
 
-eval "$(mise activate zsh)"
-
-eval "$(zoxide init --cmd cd zsh)"
-
-eval $(thefuck --alias)
-
-eval "$(register-python-argcomplete pipx)"
+source "$ZDOTDIR/zoxide.zsh"

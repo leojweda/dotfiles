@@ -144,16 +144,16 @@ function set_light_appearance() {
   update_appearance
 }
 
-# Call `set_light_appearance` on non-macOS systems before `update_appearance`
-if [[ $OSTYPE != darwin* ]]; then
-  set_light_appearance
-fi
-
 # Function to set dark appearance and trigger updates
 function set_dark_appearance() {
   export APPEARANCE="dark"
   update_appearance
 }
+
+# Call `set_light_appearance` on non-macOS systems before `update_appearance`
+if [[ $OSTYPE != darwin* ]]; then
+  set_dark_appearance
+fi
 
 [[ $- == *i* ]] && update_appearance
 

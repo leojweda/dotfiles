@@ -1,5 +1,3 @@
-#!/bin/bash  # or #!/bin/zsh if using Zsh
-
 # Get the current window index
 current_index=$(tmux display-message -p -F "#{window_index}")
 

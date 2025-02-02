@@ -1,4 +1,4 @@
-# Must be loaded before plugins.zsh.
+# Must be loaded after homebrew.zsh, but before plugins.zsh.
 
 source <(fzf --zsh)
 

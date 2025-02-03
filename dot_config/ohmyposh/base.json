@@ -98,16 +98,16 @@
 					"type": "python"
 				},
 				{
-					"type": "docker",
-					"style": "plain",
 					"foreground": "p:blue",
-					"template": "  {{ .Context }} "
+					"style": "plain",
+					"template": "  {{ .Context }} ",
+					"type": "docker"
 				},
 				{
-					"type": "text",
-					"style": "plain",
 					"foreground": "p:yellow",
-					"template": "{{ if ne .Env.BG_JOBS \"0\" }}  {{ end }}"
+					"style": "plain",
+					"template": "{{ if ne .Env.BG_JOBS \"0\" }}  {{ end }}",
+					"type": "text"
 				},
 				{
 					"background": "p:red",

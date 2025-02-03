@@ -46,12 +46,6 @@ function update_appearance() {
     # Zsh Syntax Highlighting
     zsh_comment_color='240'
 
-    # Tmux
-    tmux_background_highlight_color='black'
-    tmux_background_color='brightblack'
-    tmux_text_color='brightblue'
-    tmux_optional_text_color='brightgreen'
-
     # nano
     nano_body_text_color='lightblue'
     nano_comment_color='lightgreen'
@@ -60,12 +54,6 @@ function update_appearance() {
   else
     # Zsh Syntax Highlighting
     zsh_comment_color='245'
-
-    # Tmux
-    tmux_background_highlight_color='white'
-    tmux_background_color='brightwhite'
-    tmux_text_color='brightyellow'
-    tmux_optional_text_color='brightcyan'
 
     # nano
     nano_body_text_color='lightyellow'
@@ -79,51 +67,6 @@ function update_appearance() {
   export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=${zsh_comment_color}"
 
   if [ -n "$TMUX" ]; then
-    status_bar_background_color=$tmux_background_highlight_color
-
-    is_first_window="#{==:#{window_index},1}"
-    is_last_window="#{==:#{window_index},#{session_windows}}"
-
-    tmux set -g status-style bg=${status_bar_background_color}
-
-    status_bar_left_background_color=$tmux_background_color
-    status_bar_left_content="#[fg=${tmux_text_color},bg=${status_bar_left_background_color}] #S:#I.#P "
-    status_bar_left_suffix="#[fg=${status_bar_left_background_color},bg=${status_bar_background_color}]"
-    tmux set -g status-left "${status_bar_left_content}${status_bar_left_suffix}"
-
-    window_background_color=$status_bar_background_color
-    window_separator_color=$tmux_background_color
-    is_next_window_active="#{==:#{window_index},#{@TMUX_PREVIOUS_WINDOW_INDEX}}"
-    window_prefix="#[fg=${window_separator_color},bg=${window_background_color}]#{?${is_first_window},,}"
-    window_content="#[fg=${tmux_text_color},bg=${window_background_color}] #I#F #W"
-    window_suffix="#[fg=${window_separator_color},bg=${window_background_color}]#{?${is_next_window_active},,}"
-    tmux setw -g window-status-format "${window_prefix}${window_content}${window_suffix}"
-
-    current_window_background_color=$tmux_background_color
-    curent_window_first_window_prefix="#[fg=${status_bar_background_color}]#[bg=${current_window_background_color}]"
-    current_window_other_window_prefix="#[fg=${window_background_color}]#[bg=${current_window_background_color}]"
-    current_window_prefix="#{?${is_first_window},${curent_window_first_window_prefix},${current_window_other_window_prefix}}"
-    current_window_content="#[fg=${tmux_text_color},bg=${current_window_background_color}] #I#F #W "
-    current_window_suffix="#[fg=${current_window_background_color}]#[bg=${window_background_color}]"
-    tmux setw -g window-status-current-format "${current_window_prefix}${current_window_content}${current_window_suffix}"
-
-    leader_key_indicator_color='blue'
-    is_leader_key_pressed="client_prefix"
-
-    if [[ -n $SSH_CONNECTION ]]; then
-      status_right_background_color='color136'
-      status_rightforeground_color='color230'
-
-      leader_key_pressed_suffix="#[fg=${leader_key_indicator_color}]#[bg=${status_bar_background_color}]#[fg=${tmux_background_color}]#[bg=${leader_key_indicator_color}]^; #[fg=${status_right_background_color}]#[bg=${leader_key_indicator_color}]"
-      leader_key_not_pressed_suffix="#[fg=${status_right_background_color}]#[bg=${status_bar_background_color}]"
-      status_bar_right_suffix="#{?${is_leader_key_pressed},${leader_key_pressed_suffix},${leader_key_not_pressed_suffix}}"
-      status_bar_right_content="#[fg=${status_rightforeground_color},bg=${status_right_background_color}] #(whoami)@#H "
-      tmux set -g status-right "${status_bar_right_suffix}${status_bar_right_content}"
-    else
-      leader_key_pressed_content="#[fg=${leader_key_indicator_color}]#[bg=${status_bar_background_color}]#[fg=${tmux_background_color}]#[bg=${leader_key_indicator_color}]^; "
-      tmux set -g status-right "#{?${is_leader_key_pressed},${leader_key_pressed_content},}"
-    fi
-
     source ~/.config/tmux/update_window_indices.sh
   fi
 
@@ -156,6 +99,14 @@ if [[ $OSTYPE != darwin* ]]; then
 fi
 
 [[ $- == *i* ]] && update_appearance
+
+if [ -n "$TMUX" ]; then
+  if [[ $APPEARANCE == 'dark' ]]; then
+    tmux source-file ~/.config/tmux/solarized/solarized-dark.conf
+  else
+    tmux source-file ~/.config/tmux/solarized/solarized-light.conf
+  fi
+fi
 
 # Hook into Zsh's `precmd` to check and update the interface style before each prompt
 precmd_functions+=(update_appearance)

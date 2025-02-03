@@ -18,14 +18,8 @@ function get_interface_style() {
 function update_appearance() {
   # macOS-specific logic
   if [[ $OSTYPE == darwin* ]]; then
-    new_interface_style=$(get_interface_style)
-
-    if [[ $INTERFACE_STYLE != $new_interface_style ]]; then
-      export INTERFACE_STYLE=$new_interface_style
-    fi
-
     # Use interface style as appearance on macOS
-    export APPEARANCE=$INTERFACE_STYLE
+    export APPEARANCE=$(get_interface_style)
   else
     # On non-macOS systems, require manual setup of APPEARANCE
     if [[ -z $APPEARANCE ]]; then
@@ -102,9 +96,9 @@ fi
 
 if [ -n "$TMUX" ]; then
   if [[ $APPEARANCE == 'dark' ]]; then
-    tmux source-file ~/.config/tmux/solarized/solarized-dark.conf
+    tmux source-file $XDG_CONFIG_HOME/tmux/solarized/solarized-dark.conf
   else
-    tmux source-file ~/.config/tmux/solarized/solarized-light.conf
+    tmux source-file $XDG_CONFIG_HOME/tmux/solarized/solarized-light.conf
   fi
 fi
 

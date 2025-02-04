@@ -1,4 +1,4 @@
-# Must be loaded after env.zsh and plugins.zsh.
+# Must be loaded after plugins.zsh and appearance.zsh.
 
 # Must be loaded after history-substring-search, autosuggestions, and augosuggestions.
 

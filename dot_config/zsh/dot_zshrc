@@ -11,11 +11,11 @@ source "$ZDOTDIR/fzf.zsh"
 # Must be loaded after fzf.zsh, but before prompt.zsh.
 source "$ZDOTDIR/plugins.zsh"
 
-# Must be loaded after plugins.zsh.
-source "$ZDOTDIR/prompt.zsh"
-
-# Must be loaded after plugins.zsh.
+# Must be loaded after plugins.zsh, but before prompt.zsh.
 source "$ZDOTDIR/appearance.zsh"
+
+# Must be loaded after plugins.zsh and appearance.zsh.
+source "$ZDOTDIR/prompt.zsh"
 
 source "$ZDOTDIR/aliases.zsh"
 

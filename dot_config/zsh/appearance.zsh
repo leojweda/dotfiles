@@ -1,4 +1,4 @@
-# Must be loaded after plugins.zsh.
+# Must be loaded after plugins.zsh, but before prompt.zsh.
 
 # Must be loaded before zsh-syntax-highlighting.
 

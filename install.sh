@@ -30,8 +30,6 @@ brew bundle --file="${script_dir}/dot_config/homebrew/Brewfile"
 
 if [[ $OSTYPE == darwin* ]]; then
 	brew bundle --file="${script_dir}/dot_config/homebrew/Brewfile.darwin"
-elif [[ $OSTYPE == linux* ]]; then
-	brew bundle --file="${script_dir}/dot_config/homebrew/Brewfile.linux"
 fi
 
 set -- init --apply --source="${script_dir}"

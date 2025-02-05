@@ -1,0 +1,22 @@
+# brew "1password-cli"
+# brew "cloudflared"
+# brew "ffmpeg"
+# brew "gnupg"
+# brew "mas"
+# brew "neovim"
+# brew "nmap"
+# brew "pinentry-mac"
+# brew "python"
+# brew "ykpers"
+# brew "yt-dlp"
+# brew "yubico-piv-tool"
+
+# tap "cormacrelf/tap"
+# brew "dark-notify"
+
+# https://github.com/artginzburg/sudo-touchid?tab=readme-ov-file
+# tap "artginzburg/tap"
+# brew "sudo-touchid"
+# sudo brew services start sudo-touchid
+
+# cask "ghostty"

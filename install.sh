@@ -26,7 +26,13 @@ script_dir="$(cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)"
 
 echo '📦  Installing dependencies' >&2 && \
 brew update && \
-brew bundle --file="${script_dir}/dot_config/brew/Brewfile"
+brew bundle --file="${script_dir}/dot_config/homebrew/Brewfile"
+
+if [[ $OSTYPE == darwin* ]]; then
+	brew bundle --file="${script_dir}/dot_config/homebrew/Brewfile.darwin"
+elif [[ $OSTYPE == linux* ]]; then
+	brew bundle --file="${script_dir}/dot_config/homebrew/Brewfile.linux"
+fi
 
 set -- init --apply --source="${script_dir}"
 

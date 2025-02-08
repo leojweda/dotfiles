@@ -3,7 +3,7 @@
 export PLUGINS_DIR="$ZDOTDIR/plugins"
 
 source "$PLUGINS_DIR/zsh-completions.zsh"
-# Must be loaded after zsh-completions.
+# Must be loaded after zsh-completions, but before zsh-syntax-highlighting and zsh-autosuggestions.
 source "$PLUGINS_DIR/fzf-tab.zsh"
 
 # Must be loaded before history-substring-search, autosuggestions, and the prompt.

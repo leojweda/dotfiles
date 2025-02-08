@@ -1,3 +1,3 @@
-if [[ -z "$TMUX" && -z "$INSIDE_EMACS" && -z "$EMACS" && -z "$VIM" && -z "$INTELLIJ_ENVIRONMENT_READER" && "$TERM_PROGRAM" != "vscode" ]]; then
+if [[ -z "$TMUX" && -z "$EMACS" && -z "$INSIDE_EMACS" && -z "$VIM" && -z "$VSCODE_RESOLVING_ENVIRONMENT" && "$TERM_PROGRAM" != "vscode" && "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]]; then
   tmux attach -t default || tmux new -s default
 fi

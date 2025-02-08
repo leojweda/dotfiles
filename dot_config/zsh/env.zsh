@@ -1,3 +1,6 @@
+# Ensure path arrays do not contain duplicates.
+typeset -gU cdpath fpath mailpath path
+
 # Created by `pipx` on 2025-01-21 19:37:58
 export PATH="$PATH:/Users/leojweda/.local/bin"
 

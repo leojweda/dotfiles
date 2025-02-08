@@ -106,7 +106,7 @@
 				{
 					"foreground": "p:yellow",
 					"style": "plain",
-					"template": "{{ if ne .Env.BG_JOBS \"0\" }}  {{ end }}",
+					"template": "{{ if ne .Env.BG_JOBS \"0\" }}   {{ end }}",
 					"type": "text"
 				},
 				{

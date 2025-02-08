@@ -10,6 +10,12 @@ fi
 
 export VISUAL='code'
 
+export LESS='-g -i -M -R -X -z-4 --mouse'
+
+if [[ -z "$BROWSER" && "$OSTYPE" == darwin* ]]; then
+  export BROWSER='open'
+fi
+
 HISTFILE="$XDG_DATA_HOME/zsh/history"
 HISTSIZE=10000
 SAVEHIST=$HISTSIZE

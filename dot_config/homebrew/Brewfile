@@ -27,3 +27,6 @@ tap "homebrew/command-not-found"
 
 tap "jandedobbeleer/oh-my-posh"
 brew "oh-my-posh"
+
+tap alvinunreal/tmuxai
+brew "tmuxai"

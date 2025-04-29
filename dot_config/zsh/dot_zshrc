@@ -41,8 +41,6 @@ source "$ZDOTDIR/tlrc.zsh"
 
 source "$ZDOTDIR/tmux.zsh"
 
-source "$ZDOTDIR/tmuxai.zsh"
-
 source "$ZDOTDIR/wget.zsh"
 
 source "$ZDOTDIR/zoxide.zsh"

@@ -28,6 +28,17 @@ echo '📦  Installing dependencies' >&2 && \
 brew update && \
 brew bundle --file="${script_dir}/dot_config/homebrew/Brewfile"
 
+# Workarounds for tools that don't support linux on arm64 in Hoembrew yet
+if [[ $OSTYPE == linux* ]]; then
+	if [[ $(uname -m) == "aarch64" ]]; then
+		echo '🛠️  Installing gh manually' >&2 && \
+		sudo apt update && apt install gh
+
+		echo '🛠️  Installing Oh My Posh manually' >&2 && \
+		curl -s https://ohmyposh.dev/install.sh | bash -s
+	fi
+fi
+
 if [[ $OSTYPE == darwin* ]]; then
 	brew bundle --file="${script_dir}/dot_config/homebrew/Brewfile.darwin"
 fi

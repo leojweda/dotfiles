@@ -32,7 +32,7 @@ brew bundle --file="${script_dir}/dot_config/homebrew/Brewfile"
 if [[ $OSTYPE == linux* ]]; then
 	if [[ $(uname -m) == "aarch64" ]]; then
 		echo '🛠️  Installing gh manually' >&2 && \
-		sudo apt update && apt install gh
+		sudo apt update && sudo apt install gh
 
 		echo '🛠️  Installing Oh My Posh manually' >&2 && \
 		curl -s https://ohmyposh.dev/install.sh | bash -s

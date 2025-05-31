@@ -1,17 +1,68 @@
 [alias]
 	a = add
+	aa = add --all
 
 	b = branch
+
+	bs = bisect
+	bsb = bisect bad
+	bsg = bisect good
+	bsn = bisect new
+	bso = bisect old
+	bsr = bisect reset
+	bss = bisect start
 
 	c = commit
 	cm = commit -m
 
 	co = checkout
 	cob = checkout -b
+	coB = checkout -B
+
+	cp = cherry-pick
+	cpa = cherry-pick --abort
+	cpc = cherry-pick --continue
 
 	d = diff
 
+	l = log
+	lg = log --graph
+
+	m = merge
+	ma = merge --abort
+	mc = merge --continue
+	ms = merge --squash
+	mt = mergetool
+
+	pl = pull
+
 	p = push
+
+	rb = rebase
+	rba = rebase --abort
+	rbc = rebase --continue
+	rbi = rebase --interactive
+	rbo = rebase --onto
+	rbs = rebase --skip
+
+	r = remote
+	ra = remote add
+	rrm = remote remove
+	rmv = remote rename
+	rup = remote update
+
+	rs = restore
+	rss = restore --source
+	rst = restore --staged
+
+	sh = show
+
+	st = stash --all
+	sta = stash apply
+	stc = stash clear
+	std = stash drop
+	stl = stash list
+	stp = stash pop
 
 	s = status
 

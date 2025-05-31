@@ -30,6 +30,8 @@ source "$ZDOTDIR/bat.zsh"
 
 source "$ZDOTDIR/gh.zsh"
 
+source "$ZDOTDIR/git.zsh"
+
 source "$ZDOTDIR/less.zsh"
 
 source "$ZDOTDIR/mise.zsh"

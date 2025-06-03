@@ -65,4 +65,4 @@ alias gstd='git stash drop'
 alias gstl='git stash list'
 alias gstp='git stash pop'
 
-alias gst='git status'
+alias gs='git status'

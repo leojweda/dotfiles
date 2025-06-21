@@ -1,5 +1,15 @@
 # Must be loaded after homebrew.zsh, but before plugins.zsh.
 
+if [[ "$OSTYPE" == linux* ]]; then
+  local arch
+  arch=$(uname -m)
+
+  if [[ "$arch" == "arm64" || "$arch" == "aarch64" ]]; then
+    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+    [ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
+  fi
+fi
+
 source <(fzf --zsh)
 
 export FZF_DEFAULT_OPTS_FILE="${XDG_CONFIG_HOME}/fzf/fzfrc"

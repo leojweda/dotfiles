@@ -44,7 +44,7 @@ install_arm64_linux_fallbacks() {
     if [[ "$arch" == "arm64" || "$arch" == "aarch64" ]]; then
       sudo apt update
 
-      for pkg in fzf gh; do
+      for pkg in fzf gh lazydocker lazygit; do
         if ! command -v "$pkg" >/dev/null; then
           log "🛠️  Installing $pkg manually"
           sudo apt install -y "$pkg"

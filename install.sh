@@ -56,7 +56,7 @@ install_arm64_linux_fallbacks() {
       if ! command -v fzf >/dev/null; then
         log '🛠️  Installing fzf manually'
         git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-        ~/.fzf/install --bin
+        ~/.fzf/install --xdg --no-key-bindings --no-completion --no-update-rc --no-bash --no-fish
       fi
 
       if ! command -v oh-my-posh >/dev/null; then

@@ -46,12 +46,18 @@ install_arm64_linux_fallbacks() {
     if [[ "$arch" == "arm64" || "$arch" == "aarch64" ]]; then
       sudo apt update
 
-      for pkg in fzf gh; do
+      for pkg in gh; do
         if ! command -v "$pkg" >/dev/null; then
           log "🛠️  Installing $pkg manually"
           sudo apt install -y "$pkg"
         fi
       done
+
+      if ! command -v fzf >/dev/null; then
+        log '🛠️  Installing fzf manually'
+        git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+        ~/.fzf/install
+      fi
 
       if ! command -v oh-my-posh >/dev/null; then
         log '🛠️  Installing Oh My Posh manually'

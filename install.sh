@@ -37,7 +37,6 @@ install_brewfile() {
   if [[ $OSTYPE == darwin* ]]; then
     brew bundle --file="${1}.darwin"
   fi
-
 }
 
 # 🧪 Workaround: install unsupported packages manually on ARM Linux

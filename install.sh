@@ -30,9 +30,7 @@ install_brewfile() {
   log '📦  Installing dependencies'
   brew update
 
-	set +e
   brew bundle --file="$1"
-	set -e
 
   if [[ $OSTYPE == darwin* ]]; then
     brew bundle --file="${1}.darwin"

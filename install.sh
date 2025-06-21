@@ -30,7 +30,9 @@ brew bundle --file="${script_dir}/dot_config/homebrew/Brewfile"
 
 # Workarounds for tools that don't support linux on arm64 in Hoembrew yet
 if [[ $OSTYPE == linux* ]]; then
-	if [[ $(uname -m) == "aarch64" ]]; then
+	arch=$(uname -m)
+
+  if [[ "$arch" == "arm64" || "$arch" == "aarch64" ]]; then
 		sudo apt update && \
 
 		echo '🛠️  Installing fzf manually' >&2 && \

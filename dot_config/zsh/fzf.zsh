@@ -5,7 +5,6 @@ if [[ "$OSTYPE" == linux* ]]; then
   arch=$(uname -m)
 
   if [[ "$arch" == "arm64" || "$arch" == "aarch64" ]]; then
-    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
     [ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
   fi
 fi

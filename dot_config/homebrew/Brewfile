@@ -23,11 +23,5 @@ brew "zoxide"
 
 tap "homebrew/command-not-found"
 
-tap "jesseduffield/lazydocker"
-brew "lazydocker"
-
-tap "jesseduffield/lazygit"
-brew "lazygit"
-
 tap "jandedobbeleer/oh-my-posh"
 brew "oh-my-posh"

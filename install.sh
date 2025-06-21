@@ -44,17 +44,12 @@ install_arm64_linux_fallbacks() {
     if [[ "$arch" == "arm64" || "$arch" == "aarch64" ]]; then
       sudo apt update
 
-      for pkg in fzf gh lazygit; do
+      for pkg in fzf gh; do
         if ! command -v "$pkg" >/dev/null; then
           log "🛠️  Installing $pkg manually"
           sudo apt install -y "$pkg"
         fi
       done
-
-      if ! command -v lazydocker >/dev/null; then
-        log '🛠️  Installing LazyDocker manually'
-        curl -s https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash -s
-      fi
 
       if ! command -v oh-my-posh >/dev/null; then
         log '🛠️  Installing Oh My Posh manually'

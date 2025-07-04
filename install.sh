@@ -32,6 +32,10 @@ install_brewfile() {
 
   brew bundle --file="$1"
 
+  if [[ "$OSTYPE" == linux* && "$arch" != "arm64" && "$arch" != "aarch64" ]]; then
+    brew bundle --file="${1}.linuxarm64"
+  fi
+
   if [[ $OSTYPE == darwin* ]]; then
     brew bundle --file="${1}.darwin"
   fi

@@ -32,22 +32,20 @@ install_brewfile() {
 
   brew bundle --file="$1"
 
-  if [[ "$OSTYPE" == linux* && "$arch" != "arm64" && "$arch" != "aarch64" ]]; then
-    brew bundle --file="${1}.linuxarm64"
-  fi
-
   if [[ $OSTYPE == darwin* ]]; then
     brew bundle --file="${1}.darwin"
   fi
 }
 
 # 🧪 Workaround: install unsupported packages manually on ARM Linux
-install_arm64_linux_fallbacks() {
+install_linux_packages() {
   if [[ "$OSTYPE" == linux* ]]; then
     local arch
     arch=$(uname -m)
 
-    if [[ "$arch" == "arm64" || "$arch" == "aarch64" ]]; then
+    if [[ "$arch" != "arm64" && "$arch" != "aarch64" ]]; then
+      brew bundle --file="${1}.linux"
+    else
       sudo apt update
 
       for pkg in gh; do
@@ -90,7 +88,7 @@ main() {
   script_dir="$(cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)"
   install_brewfile "${script_dir}/dot_config/homebrew/Brewfile"
 
-  install_arm64_linux_fallbacks
+  install_linux_packages
 
   run_chezmoi "$script_dir"
 }

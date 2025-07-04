@@ -89,9 +89,9 @@ main() {
 
   brewfile_path = "${script_dir}/dot_config/homebrew/Brewfile"
 
-  install_brewfile brewfile_path
+  install_brewfile $brewfile_path
 
-  install_linux_packages brewfile_path
+  install_linux_packages $brewfile_path
 
   run_chezmoi "$script_dir"
 }

@@ -86,9 +86,12 @@ main() {
   install_homebrew
 
   script_dir="$(cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)"
-  install_brewfile "${script_dir}/dot_config/homebrew/Brewfile"
 
-  install_linux_packages
+  brewfile_path = "${script_dir}/dot_config/homebrew/Brewfile"
+
+  install_brewfile brewfile_path
+
+  install_linux_packages brewfile_path
 
   run_chezmoi "$script_dir"
 }

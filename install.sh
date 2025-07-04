@@ -34,12 +34,7 @@ install_brewfile() {
 
   if [[ $OSTYPE == darwin* ]]; then
     brew bundle --file="${1}.darwin"
-  fi
-}
-
-# 🧪 Workaround: install unsupported packages manually on ARM Linux
-install_linux_packages() {
-  if [[ "$OSTYPE" == linux* ]]; then
+  elif [[ "$OSTYPE" == linux* ]]; then
     local arch
     arch=$(uname -m)
 
@@ -87,11 +82,7 @@ main() {
 
   script_dir="$(cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)"
 
-  brewfile_path = "${script_dir}/dot_config/homebrew/Brewfile"
-
-  install_brewfile $brewfile_path
-
-  install_linux_packages $brewfile_path
+  install_brewfile "${script_dir}/dot_config/homebrew/Brewfile"
 
   run_chezmoi "$script_dir"
 }

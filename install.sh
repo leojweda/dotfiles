@@ -65,10 +65,7 @@ install_brewfile() {
 }
 
 install_try() {
-  curl -sL https://raw.githubusercontent.com/tobi/try/refs/heads/main/try.rb > ~/.local/bin/try.rb
-
-  # Make "try" executable so it can be run directly
-  chmod +x ~/.local/bin/try.rb
+  curl -sL https://raw.githubusercontent.com/tobi/try/refs/heads/main/try.rb --create-dirs --output ~/.local/bin/try.rb && chmod +x ~/.local/bin/try.rb
 }
 
 # 🏠 Run chezmoi

@@ -1,7 +1,6 @@
 brew "bat"
 brew "biome"
 brew "chezmoi"
-brew "codex"
 brew "eza"
 brew "fd"
 brew "git-delta"

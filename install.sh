@@ -64,10 +64,6 @@ install_brewfile() {
   fi
 }
 
-install_try() {
-  curl -sL https://raw.githubusercontent.com/tobi/try/refs/heads/main/try.rb --create-dirs --output ~/.local/bin/try.rb && chmod +x ~/.local/bin/try.rb
-}
-
 # 🏠 Run chezmoi
 run_chezmoi() {
   if ! command -v chezmoi >/dev/null; then
@@ -87,8 +83,6 @@ main() {
   script_dir="$(cd -P -- "$(dirname -- "$(command -v -- "$0")")" && pwd -P)"
 
   install_brewfile "${script_dir}/dot_config/homebrew/Brewfile"
-
-  install_try
 
   run_chezmoi "$script_dir"
 }

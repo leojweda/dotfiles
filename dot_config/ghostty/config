@@ -1,3 +1,4 @@
+background-blur = macos-glass-regular
 background-opacity = 0.96
 confirm-close-surface = false
 cursor-color = red
@@ -5,9 +6,9 @@ initial-window = false
 keybind = cmd+k=toggle_command_palette
 keybind = global:alt+backquote=toggle_quick_terminal
 macos-option-as-alt = true
-#quick-terminal-autohide = false
+# quick-terminal-autohide = false
 quick-terminal-screen = macos-menu-bar
-#quick-terminal-size = 700px,100%
+quick-terminal-size = 428px,100%
 theme = light:"iTerm2 Solarized Light",dark:"iTerm2 Solarized Dark"
 unfocused-split-opacity = 0.96
 window-colorspace = display-p3

@@ -46,8 +46,6 @@ source "$ZDOTDIR/thefuck.zsh"
 
 source "$ZDOTDIR/tlrc.zsh"
 
-source "$ZDOTDIR/tmux.zsh"
-
 source "$ZDOTDIR/try.zsh"
 
 source "$ZDOTDIR/wget.zsh"

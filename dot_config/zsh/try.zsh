@@ -1,1 +1,1 @@
-eval "$(~/.local/bin/try.rb init)"
+eval "$(try init)"

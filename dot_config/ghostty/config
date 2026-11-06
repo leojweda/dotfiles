@@ -1,4 +1,4 @@
-background-blur = macos-glass-regular
+background-blur = macos-glass-clear
 background-opacity = 0.96
 confirm-close-surface = false
 cursor-color = red
@@ -9,6 +9,7 @@ macos-option-as-alt = true
 # quick-terminal-autohide = false
 quick-terminal-screen = macos-menu-bar
 quick-terminal-size = 428px,100%
+shell-integration-features = cursor,sudo,title,ssh-env,ssh-terminfo,path
 theme = light:"iTerm2 Solarized Light",dark:"iTerm2 Solarized Dark"
 unfocused-split-opacity = 0.96
 window-colorspace = display-p3
